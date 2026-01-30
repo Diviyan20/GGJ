@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b8408nsgkhbm4"]
+
+[ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_jy2en"]
+[ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_w5jy8"]
+[ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="2_wqv7g"]
+
+[node name="TestScene" type="Node2D" unique_id=655981568]
+
+[node name="Player" parent="." unique_id=125716725 instance=ExtResource("1_jy2en")]
+position = Vector2(0, 1)
+motion_mode = 1
+up_direction = Vector2(0.7071068, -0.7071068)
+starting_mask = ExtResource("2_w5jy8")
+spear_scene = ExtResource("2_wqv7g")

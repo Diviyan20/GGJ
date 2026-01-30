@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaskData" format=3 uid="uid://d1fu15gvdvrq8"]
+
+[ext_resource type="Script" uid="uid://coskmirg14acb" path="res://Data/Masks/MaskData.gd" id="1_10yel"]
+
+[resource]
+script = ExtResource("1_10yel")
+mask_name = "Native"
+attack_damage = 15
+strong_against = "Wolf"
+metadata/_custom_type_script = "uid://coskmirg14acb"

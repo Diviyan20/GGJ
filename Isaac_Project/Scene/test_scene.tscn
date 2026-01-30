@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_jy2en"]
 [ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_w5jy8"]
 [ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="2_wqv7g"]
-[ext_resource type="PackedScene" uid="uid://4aflmlsyibuj" path="res://Player/enemy.tscn" id="4_huixf"]
+[ext_resource type="PackedScene" uid="uid://4aflmlsyibuj" path="res://Enemies/Scenes/enemy.tscn" id="4_huixf"]
 
 [node name="TestScene" type="Node2D" unique_id=655981568]
 

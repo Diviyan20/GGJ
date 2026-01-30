@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ble0r8lt0mqom"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v61r"]
+
+[node name="EnemyBase" type="CharacterBody2D" unique_id=1433610574]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=523726703]
+shape = SubResource("RectangleShape2D_8v61r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1640891959]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1703534824]
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=2103918251]

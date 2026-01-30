@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://b8408nsgkhbm4"]
 
 [ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_jy2en"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://4aflmlsyibuj" path="res://Player/enemy.tscn" id="4_huixf"]
 [ext_resource type="PackedScene" uid="uid://dumuukb74f7pi" path="res://UI/HUD.tscn" id="5_xdm7g"]
 [ext_resource type="PackedScene" uid="uid://d1ioqt70005jd" path="res://Prefab/Coin/coin.tscn" id="6_yg8v8"]
+=======
+[ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_w5jy8"]
+[ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="2_wqv7g"]
+>>>>>>> origin/enemy-manager
 
 [node name="TestScene" type="Node2D" unique_id=655981568]
 
@@ -11,6 +16,7 @@
 position = Vector2(0, 1)
 motion_mode = 1
 up_direction = Vector2(0.7071068, -0.7071068)
+<<<<<<< HEAD
 
 [node name="Enemy" parent="." unique_id=1648478892 node_paths=PackedStringArray("attacker", "target") instance=ExtResource("4_huixf")]
 position = Vector2(518, 0)
@@ -46,3 +52,7 @@ scale = Vector2(0.2, 0.2)
 [node name="Coin7" parent="." unique_id=1183897344 instance=ExtResource("6_yg8v8")]
 position = Vector2(184, 58)
 scale = Vector2(0.2, 0.2)
+=======
+starting_mask = ExtResource("2_w5jy8")
+spear_scene = ExtResource("2_wqv7g")
+>>>>>>> origin/enemy-manager

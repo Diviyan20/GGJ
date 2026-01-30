@@ -16,10 +16,12 @@ starting_mask = ExtResource("2_gwnis")
 move_speed = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=960359477]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_btcbx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=800362068]
 position = Vector2(0.5, 0)
+scale = Vector2(0.4, 0.4)
 shape = SubResource("RectangleShape2D_4ntmi")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1887239872]
@@ -27,6 +29,21 @@ shape = SubResource("RectangleShape2D_4ntmi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=2050550397]
 shape = SubResource("CircleShape2D_btcbx")
 
-[node name="HPBar" type="TextureProgressBar" parent="." unique_id=1400192004]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HPBarRoot" type="Node2D" parent="." unique_id=1750352440]
+z_index = 10
+position = Vector2(-75, -100)
+
+[node name="HPBar" type="TextureProgressBar" parent="HPBarRoot" unique_id=1212926991]
+z_index = 10
+offset_left = 472.0
+offset_top = 31.0
+offset_right = 622.0
+offset_bottom = 51.0
+value = 100.0
+tint_progress = Color(0, 1, 0.5137255, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1411724628]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1088140997]
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true

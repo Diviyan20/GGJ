@@ -5,17 +5,27 @@ extends CharacterBody2D
 @export var aoe_radius := 96
 @export var move_speed := 100.0
 @export var max_hp := 100
-
+@export var starting_money := 0
+var money := 0
 var hp := max_hp
 var can_attack := true
 var current_mask: MaskData = null
 var aim_dir: Vector2 = Vector2.DOWN
 
+@onready var hud = get_tree().get_first_node_in_group("hud")
+
 func _ready():
+	money = starting_money
+	update_money_ui()
 	hp = max_hp
 	if starting_mask:
 		equip_mask(starting_mask)
 	update_hp_bar()
+
+func update_money_ui():
+	if hud:
+		hud.set_money(money)
+
 
 func equip_mask(mask: MaskData):
 	current_mask = mask
@@ -48,13 +58,21 @@ func take_damage(amount: int):
 	hp -= amount
 	hp = max(hp, 0)
 	update_hp_bar()
+	
+	if hp <= 0:
+		die()
+
+func die():
+	print("Player died")
+	queue_free()
 
 func heal(amount: int):
 	hp = min(hp + amount, max_hp)
 	update_hp_bar()
 
 func update_hp_bar():
-	$HPBar.value = float(hp) / float(max_hp) * 100
+	var percent := float(hp) / float(max_hp) * 100.0
+	$HPBarRoot/HPBar.value = percent
 
 
 func update_aim_direction():
@@ -69,6 +87,15 @@ func update_aim_direction():
 func _input(event):
 	if event.is_action_pressed("Attack"):
 		perform_attack()
+	
+	if event.is_action_pressed("ui_accept"):
+		take_damage(10)
+	
+	if event.is_action_pressed("ui_accept"):
+		add_money(10)
+	
+	if event.is_action_pressed("ui_cancel"):
+		spend_money(5)
 
 func perform_attack():
 	if not can_attack or current_mask == null:
@@ -118,3 +145,18 @@ func attack_godot():
 		var body = result.collider
 		if body.has_method("take_damage"):
 			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
+
+func add_money(amount: int):
+	money += amount
+	update_money_ui()
+
+func can_afford(amount: int) -> bool:
+	return money >= amount
+
+func spend_money(amount: int) -> bool:
+	if not can_afford(amount):
+		return false
+
+	money -= amount
+	update_money_ui()
+	return true

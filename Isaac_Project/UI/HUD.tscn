@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dumuukb74f7pi"]
+
+[ext_resource type="Script" uid="uid://2sdyir05bje7" path="res://UI/hud.gd" id="1_ijstf"]
+[ext_resource type="Texture2D" uid="uid://da0fxodvc6w8t" path="res://Image/Coins.png" id="2_4n7mi"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1642666173 groups=["hud"]]
+script = ExtResource("1_ijstf")
+
+[node name="MoneyContainer" type="HBoxContainer" parent="." unique_id=1972613558]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyIcon" type="TextureRect" parent="MoneyContainer" unique_id=919611146]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("2_4n7mi")
+expand_mode = 1
+
+[node name="MoneyLabel" type="Label" parent="MoneyContainer" unique_id=1759955967]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"

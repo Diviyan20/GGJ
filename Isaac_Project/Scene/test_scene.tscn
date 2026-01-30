@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_w5jy8"]
 [ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="2_wqv7g"]
 [ext_resource type="PackedScene" uid="uid://4aflmlsyibuj" path="res://Player/enemy.tscn" id="4_huixf"]
+[ext_resource type="PackedScene" uid="uid://dumuukb74f7pi" path="res://UI/HUD.tscn" id="5_xdm7g"]
 
 [node name="TestScene" type="Node2D" unique_id=655981568]
 
@@ -18,3 +19,5 @@ spear_scene = ExtResource("2_wqv7g")
 position = Vector2(518, 0)
 attacker = NodePath("../Player")
 target = NodePath("../Player")
+
+[node name="HUD" parent="." unique_id=1642666173 instance=ExtResource("5_xdm7g")]

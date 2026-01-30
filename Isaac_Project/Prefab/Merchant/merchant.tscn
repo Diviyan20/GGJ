@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://7hvw7bwrh5pu"]
+
+[ext_resource type="Script" uid="uid://tn6wyk23hgll" path="res://Prefab/Merchant/merchant.gd" id="1_g267c"]
+[ext_resource type="Texture2D" uid="uid://bv58jscfljw6g" path="res://Image/Merchant.png" id="1_pjjhi"]
+[ext_resource type="Script" uid="uid://coskmirg14acb" path="res://Data/Masks/MaskData.gd" id="2_lns8s"]
+[ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="3_48bui"]
+[ext_resource type="Resource" uid="uid://bbalv8ihnk3lm" path="res://Data/Masks/Wolf/WolfMask.tres" id="4_jwkd6"]
+[ext_resource type="Resource" uid="uid://cjjoyodi8qa4k" path="res://Data/Masks/Godot Mask/GodotMask.tres" id="5_5ub8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g267c"]
+size = Vector2(47, 62)
+
+[node name="Merchant" type="Area2D" unique_id=657056221]
+script = ExtResource("1_g267c")
+masks_for_sale = Array[ExtResource("2_lns8s")]([ExtResource("3_48bui"), ExtResource("4_jwkd6"), ExtResource("5_5ub8i")])
+prices = Dictionary[String, int]({
+"Godot": 80,
+"Native": 20,
+"Wolf": 40
+})
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=728673942]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_pjjhi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=262659617]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_g267c")

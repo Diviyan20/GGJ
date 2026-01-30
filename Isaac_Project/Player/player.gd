@@ -87,15 +87,6 @@ func update_aim_direction():
 func _input(event):
 	if event.is_action_pressed("Attack"):
 		perform_attack()
-	
-	if event.is_action_pressed("ui_accept"):
-		take_damage(10)
-	
-	if event.is_action_pressed("ui_accept"):
-		add_money(10)
-	
-	if event.is_action_pressed("ui_cancel"):
-		spend_money(5)
 
 func perform_attack():
 	if not can_attack or current_mask == null:
@@ -154,9 +145,8 @@ func can_afford(amount: int) -> bool:
 	return money >= amount
 
 func spend_money(amount: int) -> bool:
-	if not can_afford(amount):
+	if money < amount:
 		return false
-
 	money -= amount
 	update_money_ui()
 	return true

@@ -9,4 +9,3 @@ stream = SubResource("AudioStreamMP3_hybvu")
 bus = &"BGM"
 parameters/looping = true
 script = ExtResource("1_q3mph")
-is_battle = true

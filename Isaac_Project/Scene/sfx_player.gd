@@ -25,6 +25,6 @@ func run_sfx(stream: AudioStream):
 	player.stream = stream
 	player.bus = "SFX"
 	add_child(player)
-	player.pitch_scale = randf(0.90, 1.10);
+	player.pitch_scale = randf_range(0.90, 1.10);
 	player.play()
 	player.finished.connect(player.queue_free)

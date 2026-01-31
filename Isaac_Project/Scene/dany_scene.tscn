@@ -16,6 +16,9 @@ position = Vector2(106.99999, 0.99999994)
 [node name="Coin2" parent="." unique_id=1298596146 instance=ExtResource("2_gpwwo")]
 position = Vector2(-125.99998, 0.99999994)
 
+[node name="Coin5" parent="." unique_id=2011615830 instance=ExtResource("2_gpwwo")]
+position = Vector2(-142.665, 1)
+
 [node name="Coin3" parent="." unique_id=1864444527 instance=ExtResource("2_gpwwo")]
 position = Vector2(-61.999996, -92.99999)
 

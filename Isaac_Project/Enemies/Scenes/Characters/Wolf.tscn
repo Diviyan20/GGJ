@@ -156,8 +156,9 @@ metadata/_custom_type_script = "uid://d4e8f77ihiagf"
 size = Vector2(34, 28)
 
 [node name="Wolf" unique_id=1433610574 instance=ExtResource("1_1d7fb")]
+collision_layer = 2
 script = ExtResource("2_fjrfi")
-damage = 0
+damage = 2
 data = SubResource("Resource_fjrfi")
 attack_range = 50.0
 

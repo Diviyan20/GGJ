@@ -1,74 +1,29 @@
 extends EnemyBase
 class_name Wolf
 
-@export var attack_range: float  = 24.0 # Distance to trigger melee attack
+@export var attack_range: float  = 50.0 # Distance to trigger melee attack
 @export var damage: int =2
-
-# Internal References
-var is_attacking: bool = false
 
 func _ready() -> void:
 	super._ready() # Initialize all attributes in EnemyBase
-	# Start idle animation
-	anim_sprite.play("idle")
-	
 	# Ensure attack timer is setup
 	attack_timer.wait_time = data.attack_speed
-	attack_timer.timeout.connect(_on_attack_timer_timeout)
 
 func _physics_process(delta: float) -> void:
+	update_facing()
 	if player == null:
 		return
-
 	var distance = global_position.distance_to(player.global_position)
 
-	update_facing()
-
-	if distance <= attack_range:
+	if distance <= attack_range and can_attack:
 		start_attack()
-	else:
-		# Move toward player using EnemyBase chase system
+	elif not is_attacking:
 		chase_player(delta)
 
-		# Play walking animation if moving
 		if velocity.length() > 0:
-			play_anim("walk")
+			anim_sprite.play("walk")
 		else:
-			play_anim("idle")
-		
-# -----------------
-# ATTACK LOGIC
-# -----------------
-func start_attack() -> void:
-	if is_attacking or not can_attack:
-		return
-	
-	is_attacking = true
-	can_attack = false
-	
-	# Stop moving while attacking
-	velocity = Vector2.ZERO
-	
-	# Play attack animation
-	anim_sprite.play("attack")
-	
-	# Schedule actual damage application when animation ends or after a short delay
-	# For simplicity, we’ll just use a timer equal to attack_speed
-	attack_timer.start()
-
-
-# ------------------
-# HELPERS (ANIMATION AND SPRITE FLIPPING)
-# ------------------
-func play_anim(name: String) -> void:
-	if anim_sprite.animation != name:
-		anim_sprite.play(name)
-
-func update_facing() -> void:
-	if player == null:
-		return
-	
-	anim_sprite.flip_h = player.global_position.x < global_position.x
+			anim_sprite.play("idle")
 
 # -----------------
 # TIMER CALLBACK

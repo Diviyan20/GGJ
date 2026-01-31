@@ -6,4 +6,5 @@
 
 [node name="SFX Player" type="AudioStreamPlayer2D" unique_id=1038320285]
 stream = SubResource("AudioStreamWAV_2wd35")
+bus = &"SFX"
 script = ExtResource("1_0ye5h")

@@ -6,6 +6,7 @@
 
 [node name="BGM Player" type="AudioStreamPlayer2D" unique_id=741485079]
 stream = SubResource("AudioStreamMP3_hybvu")
+bus = &"BGM"
 parameters/looping = true
 script = ExtResource("1_q3mph")
 is_battle = true

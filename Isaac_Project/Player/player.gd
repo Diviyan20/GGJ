@@ -26,6 +26,7 @@ var direction: Vector2
 var current_facing: String = "front"
 
 func _ready():
+	add_to_group("player")
 	money = starting_money
 	update_money_ui()
 	if starting_mask:

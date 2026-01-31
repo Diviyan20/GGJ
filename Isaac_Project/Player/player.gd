@@ -10,20 +10,32 @@ var money := 0
 var hp := max_hp
 var can_attack := true
 var current_mask: MaskData = null
+var current_mask_name := ""
 var aim_dir: Vector2 = Vector2.DOWN
 var owned_masks: Array[MaskData] = []
 var base_move_speed := move_speed
 var attack_speed_multiplier := 1.0
 
+enum Facing { FRONT, BACK, SIDE }
+var facing := Facing.FRONT
+
 @onready var hud = get_tree().get_first_node_in_group("hud")
+@onready var mask_sprite_main: AnimatedSprite2D = $MaskSprite2
 
 func _ready():
 	money = starting_money
 	update_money_ui()
+
 	hp = max_hp
+	update_hp_bar()
+
+	mask_sprite_main.visible = false
+
 	if starting_mask:
 		equip_mask(starting_mask)
-	update_hp_bar()
+	
+func change_mask(anim_name:String):
+	mask_sprite_main.play(anim_name)
 
 func update_money_ui():
 	if hud:
@@ -31,14 +43,89 @@ func update_money_ui():
 
 
 func equip_mask(mask: MaskData):
+	# If a mask is already equipped → destroy it first
+	if current_mask_name != "":
+		await _play_mask_destroy(current_mask_name)
+
 	current_mask = mask
-	if not owned_masks.has(mask):
-		owned_masks.append(mask)
+	current_mask_name = mask.mask_name
+
+	# Equip new mask
+	await _play_mask_equip(mask.mask_name)
+
 	print("Equipped mask:", mask.mask_name)
+
+func _play_mask_destroy(mask_name: String):
+	var anim_name := "destroy_%s" % mask_name.to_lower()
+
+	if not mask_sprite_main.sprite_frames.has_animation(anim_name):
+		return
+
+	mask_sprite_main.visible = true
+	mask_sprite_main.play(anim_name)
+
+	await mask_sprite_main.animation_finished
+
+	mask_sprite_main.visible = false
+
+func _play_mask_equip(mask_name: String):
+	var anim_name := "equip_%s" % mask_name.to_lower()
+
+	if not mask_sprite_main.sprite_frames.has_animation(anim_name):
+		push_error("Missing animation: " + anim_name)
+		return
+
+	mask_sprite_main.visible = true
+	mask_sprite_main.play(anim_name)
+
+	await mask_sprite_main.animation_finished
+
+
+#func _set_mask_texture(mask_name: String):
+	#match mask_name:
+		#"Wolf":
+			#$MaskSprite.texture = preload("res://Sprite/mask/tile162.png")
+		#"Native":
+			#$MaskSprite.texture = preload("res://Sprite/mask/tile161.png")
+		#"Godot":
+			#$MaskSprite.texture = preload("res://Sprite/mask/tile160.png")
 
 func _physics_process(delta):
 	handle_movement()
 	update_aim_direction()
+
+func update_facing(input_dir: Vector2):
+	if input_dir == Vector2.ZERO:
+		return
+
+	if abs(input_dir.x) > abs(input_dir.y):
+		facing = Facing.SIDE
+	else:
+		if input_dir.y < 0:
+			facing = Facing.BACK
+		else:
+			facing = Facing.FRONT
+
+func update_sprite(input_dir: Vector2):
+	var sprite := $Sprite2D
+	var anim := $Sprite2D/AnimationPlayer
+
+
+	match facing:
+		Facing.FRONT:
+			anim.play("walk_backward")
+			sprite.flip_h = false
+
+		Facing.BACK:
+			anim.play("walk_forward")
+			sprite.flip_h = false
+
+		Facing.SIDE:
+			anim.play("walk_side")
+			sprite.flip_h = input_dir.x < 0
+
+
+
 
 func handle_movement():
 	var input_dir := Vector2(
@@ -48,8 +135,10 @@ func handle_movement():
 
 	if input_dir.length() > 0:
 		input_dir = input_dir.normalized()
+		update_facing(input_dir)
+		update_sprite(input_dir)
 
-	velocity = input_dir * move_speed
+	velocity = input_dir * get_move_speed()
 	move_and_slide()
 
 func get_move_speed() -> float:
@@ -58,13 +147,14 @@ func get_move_speed() -> float:
 		speed *= current_mask.speed_multiplier
 	return speed * attack_speed_multiplier
 
-func take_damage(amount: int):
+func take_damage(amount: int, attacker_mask := ""):
 	if current_mask and current_mask.has_shield:
 		return
+
 	hp -= amount
 	hp = max(hp, 0)
 	update_hp_bar()
-	
+
 	if hp <= 0:
 		die()
 
@@ -125,6 +215,8 @@ func attack_wolf():
 	$AttackArea.rotation = aim_dir.angle()
 
 	for body in $AttackArea.get_overlapping_bodies():
+		if body == self:
+			continue
 		if body.has_method("take_damage"):
 			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
 

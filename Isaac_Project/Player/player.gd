@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var starting_mask: MaskData
 @export var spear_scene: PackedScene
+@export var godot_aoe_scene: PackedScene
 @export var aoe_radius := 96
 @export var move_speed := 100.0
 @export var max_hp := 100
@@ -206,8 +207,11 @@ func perform_attack():
 func attack_native():
 	var spear = spear_scene.instantiate()
 	get_parent().add_child(spear)
+
 	spear.global_position = global_position
 	spear.direction = aim_dir
+	spear.rotation = aim_dir.angle()
+
 	spear.damage = current_mask.attack_damage
 
 func attack_wolf():

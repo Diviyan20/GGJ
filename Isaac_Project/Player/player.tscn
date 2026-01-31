@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="3_k53q1"]
 [ext_resource type="Texture2D" uid="uid://cuy4sbqykoe8a" path="res://Sprite/Sprite sheet 1.png" id="4_gwnis"]
+[ext_resource type="PackedScene" uid="uid://dwq2m46rdt2ol" path="res://Data/Masks/Godot Mask/godot_meme_aoe.tscn" id="4_k53q1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
 atlas = ExtResource("4_gwnis")
@@ -406,6 +407,7 @@ radius = 326.20392
 script = ExtResource("1_4ntmi")
 starting_mask = ExtResource("2_gwnis")
 spear_scene = ExtResource("3_k53q1")
+godot_aoe_scene = ExtResource("4_k53q1")
 move_speed = 150.0
 
 [node name="MaskSprite2" type="AnimatedSprite2D" parent="." unique_id=1945696174]
@@ -454,3 +456,5 @@ tint_progress = Color(0, 1, 0.5137255, 1)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1088140997]
 zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
+
+[node name="GodotMemeAOE" parent="." unique_id=566354008 instance=ExtResource("4_k53q1")]

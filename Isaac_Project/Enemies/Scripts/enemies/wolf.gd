@@ -48,3 +48,6 @@ func _on_animation_finished() -> void:
 		# Start cooldown
 		attack_timer.start()
 		is_attacking = false
+
+func _on_died() -> void:
+	queue_free()

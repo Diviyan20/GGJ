@@ -10,3 +10,5 @@ position = Vector2(296, 269)
 
 [node name="Wolf" parent="." unique_id=1433610574 instance=ExtResource("2_84rq8")]
 position = Vector2(646, 480)
+collision_mask = 2
+safe_margin = 15.167

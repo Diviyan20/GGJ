@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ble0r8lt0mqom" path="res://Enemies/Scenes/EnemyBase.tscn" id="1_1d7fb"]
 [ext_resource type="Script" uid="uid://cy1uqhys5wfqy" path="res://Enemies/Scripts/data/enemy_data.gd" id="2_b1ree"]
 [ext_resource type="Texture2D" uid="uid://cg5m2p0ihgqso" path="res://Enemies/Assets/Placeholders/Hyena/Hyena_walk.png" id="2_f0vfr"]
+[ext_resource type="Script" uid="uid://737nuyrpabf4" path="res://Enemies/Scripts/enemies/wolf.gd" id="2_fjrfi"]
 [ext_resource type="Texture2D" uid="uid://daulmrv36wjft" path="res://Enemies/Assets/Placeholders/Hyena/Hyena_attack.png" id="2_w88db"]
 [ext_resource type="Texture2D" uid="uid://bjjih1i075psq" path="res://Enemies/Assets/Placeholders/Hyena/Hyena_idle.png" id="3_0slpg"]
 
@@ -75,7 +76,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("2_f0vfr")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xgqxn"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_b1ree"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -145,11 +146,15 @@ animations = [{
 size = Vector2(34, 28)
 
 [node name="Wolf" unique_id=1433610574 instance=ExtResource("1_1d7fb")]
+script = ExtResource("2_fjrfi")
+attack_range = 50.0
+damage = 2
 data = SubResource("Resource_fjrfi")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1669407395]
-sprite_frames = SubResource("SpriteFrames_xgqxn")
+sprite_frames = SubResource("SpriteFrames_b1ree")
 animation = &"walk"
+frame_progress = 0.8478057
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2" unique_id=836087756]
 position = Vector2(5, 10)

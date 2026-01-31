@@ -1,3 +1,7 @@
-[gd_resource type="Resource" format=3 uid="uid://btr3h2gemyefk"]
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://btr3h2gemyefk"]
+
+[ext_resource type="Script" uid="uid://cy1uqhys5wfqy" path="res://Enemies/Scripts/data/enemy_data.gd" id="1_ueo6w"]
 
 [resource]
+script = ExtResource("1_ueo6w")
+coins_amount = 10

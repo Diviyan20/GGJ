@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmgqtdlahgdgj"]
 
 [ext_resource type="Script" uid="uid://dre3cmj1p0o7p" path="res://Player/spear.gd" id="1_gsh2n"]
-[ext_resource type="Texture2D" uid="uid://bt3d14fa56vkj" path="res://icon.svg" id="2_p7phm"]
+[ext_resource type="Texture2D" uid="uid://x6ege584jbc5" path="res://Enemies/Assets/Placeholders/pixel_spear.png" id="2_p7phm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsh2n"]
 
@@ -11,7 +11,9 @@ collision_mask = 2
 script = ExtResource("1_gsh2n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=924246656]
-scale = Vector2(0.765, 0.17)
+texture_filter = 1
+rotation = 0.9599311
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_p7phm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=204092211]

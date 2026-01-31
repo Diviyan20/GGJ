@@ -19,31 +19,54 @@ var attack_speed_multiplier := 1.0
 
 # Animation
 enum mask_type {None, Godot, Native, Wolf}
-@export var current_mask_sprite: mask_type = mask_type.Godot
-@onready var player_anim := $PlayerSprite
-@onready var mask_anim := $MaskSprite
+@export var current_mask_sprite: mask_type = mask_type.None
+@onready var player_anim: AnimatedSprite2D = $PlayerSprite
+@onready var mask_anim: AnimatedSprite2D = $MaskSprite
 var direction: Vector2
 var current_facing: String = "front"
 
 func _ready():
+	player_anim.self_modulate = Color(1.0, 1.0, 1.0, 1.0);
 	add_to_group("player")
+
 	money = starting_money
 	update_money_ui()
+
 	if starting_mask:
-		equip_mask(starting_mask)
-	change_mask(current_mask_sprite)
-		
+		current_mask = starting_mask
+		current_mask_sprite = _maskdata_to_enum(starting_mask)
+
+		# Directly play ON animation (no OFF on start)
+		mask_anim.show()
+		mask_anim.play(mask_type.keys()[current_mask_sprite] + "_on")
+
 	health.died.connect(_on_died)
 
 func update_money_ui():
 	if hud:
 		hud.set_money(money)
 
+func _maskdata_to_enum(mask: MaskData) -> mask_type:
+	match mask.mask_name:
+		"Godot":
+			return mask_type.Godot
+		"Native":
+			return mask_type.Native
+		"Wolf":
+			return mask_type.Wolf
+		_:
+			return mask_type.None
+
 
 func equip_mask(mask: MaskData):
 	current_mask = mask
+
 	if not owned_masks.has(mask):
 		owned_masks.append(mask)
+
+	var new_mask_enum := _maskdata_to_enum(mask)
+	await change_mask(new_mask_enum)
+
 	print("Equipped mask:", mask.mask_name)
 
 
@@ -58,21 +81,32 @@ func Movement():
 		current_facing = "right"
 	elif direction.x < 0:
 		current_facing = "left"
+
+
 func Char_player_animation():
 	if direction == Vector2.ZERO:
 		player_anim.play("Idle_"+current_facing)
 	else:
 		player_anim.play("Walk_"+current_facing)
-func change_mask(mask: mask_type):
+
+
+func change_mask(new_mask: mask_type) -> void:
+	if current_mask_sprite == new_mask:
+		return
+
+	# Destroy old mask
 	if current_mask_sprite != mask_type.None:
-		mask_anim.play(mask_type.keys()[current_mask_sprite]+"_off")
-	await mask_anim.animation_finished
-	current_mask_sprite = mask
-	if mask == mask_type.None:
+		mask_anim.play(mask_type.keys()[current_mask_sprite] + "_off")
+		await mask_anim.animation_finished
+
+	current_mask_sprite = new_mask
+
+	# Equip new mask
+	if new_mask == mask_type.None:
 		mask_anim.hide()
 	else:
 		mask_anim.show()
-		mask_anim.play(mask_type.keys()[current_mask_sprite]+"_on")
+		mask_anim.play(mask_type.keys()[new_mask] + "_on")
 
 func _physics_process(delta):
 	Movement()
@@ -135,6 +169,7 @@ func attack_native():
 	get_parent().add_child(spear)
 	spear.global_position = global_position
 	spear.direction = aim_dir
+	spear.rotation = aim_dir.angle()
 	spear.damage = current_mask.attack_damage
 
 func attack_wolf():
@@ -170,6 +205,7 @@ func attack_godot():
 # ----------------
 func take_damage(amount: float) -> void:
 	health.take_damage(amount)
+	
 
 func heal(amount: float) -> void:
 	health.heal(amount)

@@ -18,15 +18,15 @@ func _on_scene_changed(in_battle):
 	if in_battle:
 		var next_stream = load(battle_mode);
 		if audio_player.stream != next_stream:
-			fade_to(next_stream, 1.5);
+			fade_to(next_stream, 1.0);
 	else:
 		var next_stream = load(exploration_mode);
 		if audio_player.stream != next_stream:
-			fade_to(next_stream, 1.5);
+			fade_to(next_stream, 1.0);
 
 func fade_to(new_stream: AudioStream, duration: float = 1.0) -> void:
 	var start_vol_db = audio_player.volume_db
-	var end_vol_db = -80.0  # minimum volume = silent
+	var end_vol_db = -50.0  # minimum volume = silent
 	
 	# Fade out
 	var time_passed = 0.0

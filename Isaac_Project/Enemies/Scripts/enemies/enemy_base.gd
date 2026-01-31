@@ -8,14 +8,15 @@ class_name EnemyBase
 # === RUNTIME STATE ===
 var current_health: float
 var can_attack: bool
+var is_attacking: bool = false
 var player: CharacterBody2D
 
 # === CHASE SETTINGS ===
 @export var chase_enabled: bool = true
-@export var stop_distance: float = 16.0
+@export var attack_range: float = 16.0
 
 # === NODES ===
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
 
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 		push_warning("Enemy has no EnemyData assigned!")
 		return
 	current_health = data.health
+	can_attack = true
 	
 	if player == null:
 		player = get_tree().current_scene.get_node("Player")
@@ -38,16 +40,9 @@ func _ready() -> void:
 	attack_timer.wait_time = data.attack_speed
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 
-func _physics_process(delta: float) -> void:
-	if player == null:
-		push_warning("Player Node not Found!")
-		return
-	chase_player(delta)
-
 # -------------------
 # DAMAGE SYSTEM
 # -------------------
-
 func take_damage(base_damage: int, masked_multiplier: int) -> void:
 	# Final damage depends on masked matchup
 	var final_damage = int(base_damage * masked_multiplier)
@@ -61,7 +56,6 @@ func take_damage(base_damage: int, masked_multiplier: int) -> void:
 # ---------------
 # ENEMY DEATH
 # ---------------
-
 func die() -> void:
 	drop_coins()
 	queue_free()
@@ -83,22 +77,34 @@ func chase_player(delta: float) -> void:
 	var distance = to_player.length()
 	
 	# Stop if too close (Prevents jitter and stacking)
-	if distance <= stop_distance:
+	if distance <= attack_range:
 		velocity = Vector2.ZERO
 	else:
-		var direction = to_player.normalized()
-		velocity = direction * data.speed
-	
+		velocity = to_player.normalized() * data.speed
 	move_and_slide()
+
+# ------------------
+# HELPERS (SPRITE FLIPPING)
+# ------------------
+func update_facing() -> void:
+	if player == null:
+		return
+	anim_sprite.flip_h = player.global_position.x > global_position.x
 
 # ----------------
 # ATTACK SYSTEM
 # ----------------
-func try_attack() -> void:
-	# Called when enemy is in range
-	if not can_attack:
+func start_attack() -> void:
+	if is_attacking or not can_attack:
 		return
+	is_attacking = true
 	can_attack = false
+	
+	# Stop moving while attacking
+	velocity = Vector2.ZERO
+	
+	# Play attack animation
+	anim_sprite.play("attack")
 	
 	# TODO: apply damage to player here
 	# player.take_damage(data.damage)

@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://xggynabd8oi1"]
 
 [ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_84rq8"]
-[ext_resource type="PackedScene" uid="uid://2mpsiewoj0fb" path="res://Enemies/Scenes/Characters/Native.tscn" id="2_4vbnf"]
+[ext_resource type="PackedScene" uid="uid://2mpsiewoj0fb" path="res://Enemies/Scenes/Characters/Native.tscn" id="2_84rq8"]
 
 [node name="Testing" type="Node2D" unique_id=1434516048]
 
 [node name="Player" parent="." unique_id=125716725 instance=ExtResource("1_84rq8")]
 position = Vector2(296, 269)
 
-[node name="EnemyBase" parent="." unique_id=1433610574 instance=ExtResource("2_4vbnf")]
-position = Vector2(901, 447)
+[node name="EnemyBase" parent="." unique_id=1433610574 instance=ExtResource("2_84rq8")]
+position = Vector2(492, 348)
+attack_range = 40.0

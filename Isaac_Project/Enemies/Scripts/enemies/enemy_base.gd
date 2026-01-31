@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 class_name EnemyBase
 
 # === DATA RESOURCE ===
@@ -9,7 +8,11 @@ class_name EnemyBase
 # === RUNTIME STATE ===
 var current_health: float
 var can_attack: bool
-var player: CharacterBody2D = null
+var player: CharacterBody2D
+
+# === CHASE SETTINGS ===
+@export var chase_enabled: bool = true
+@export var stop_distance: float = 16.0
 
 # === NODES ===
 @onready var sprite: Sprite2D = $Sprite2D
@@ -23,23 +26,23 @@ func _ready() -> void:
 		return
 	current_health = data.health
 	
-	# Cache player reference
-	player = get_tree().get_first_node_in_group("player")
+	if player == null:
+		player = get_tree().current_scene.get_node("Player")
+	
+	if player:
+		print("EnemyBase: Player Assigned")
+	else:
+		push_error("EnemyBase: Could not find the Player node in the scene!")
 	
 	# Configure Attack Timer
 	attack_timer.wait_time = data.attack_speed
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 
-func _physics_process(_delta: float) -> void:
-	# Default behavior:
-	# Move directly toward player
-	
-	# Child enemies can override this function to create dash, ranged
-	# and snake logic
-	
-	var direction = (player.global_position - global_position).normalized()
-	velocity = direction * data.speed
-	move_and_slide()
+func _physics_process(delta: float) -> void:
+	if player == null:
+		push_warning("Player Node not Found!")
+		return
+	chase_player(delta)
 
 # -------------------
 # DAMAGE SYSTEM
@@ -68,6 +71,25 @@ func drop_coins() -> void:
 	# Call from GameManager for simplicity
 	#GameManager.add_coins(data.coins_amount)
 	pass
+
+# ------------------------
+# CHASE SYSTEM
+# ------------------------
+func chase_player(delta: float) -> void:
+	if not chase_enabled or player == null:
+		return
+	
+	var to_player = player.global_position - global_position
+	var distance = to_player.length()
+	
+	# Stop if too close (Prevents jitter and stacking)
+	if distance <= stop_distance:
+		velocity = Vector2.ZERO
+	else:
+		var direction = to_player.normalized()
+		velocity = direction * data.speed
+	
+	move_and_slide()
 
 # ----------------
 # ATTACK SYSTEM

@@ -97,8 +97,6 @@ func get_move_speed() -> float:
 		speed *= current_mask.speed_multiplier
 	return speed * attack_speed_multiplier
 
-
-
 func update_aim_direction():
 	var dir := Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
@@ -143,16 +141,18 @@ func attack_wolf():
 	$AttackArea.rotation = aim_dir.angle()
 
 	for body in $AttackArea.get_overlapping_bodies():
-		if body.has_method("take_damage"):
-			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
+		if body.has_node("Health"):
+			var enemy_health: Health = body.get_node("Health")
+			enemy_health.take_damage(current_mask.attack_damage)
+			print("Enemy Damaged")
+		else:
+			push_warning("Code not executed")
 
 func attack_godot():
 	var space_state = get_world_2d().direct_space_state
-
 	var query = PhysicsShapeQueryParameters2D.new()
 	var shape = CircleShape2D.new()
 	shape.radius = aoe_radius
-
 	query.shape = shape
 	query.transform = Transform2D(0, global_position)
 
@@ -160,8 +160,9 @@ func attack_godot():
 
 	for result in results:
 		var body = result.collider
-		if body.has_method("take_damage"):
-			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
+		if body.has_node("Health"):
+			var enemy_health: Health = body.get_node("Health")
+			enemy_health.take_damage(current_mask.attack_damage)
 
 # ----------------
 # DAMAGE SYSTEM

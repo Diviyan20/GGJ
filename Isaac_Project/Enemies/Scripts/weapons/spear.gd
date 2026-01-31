@@ -1,42 +1,50 @@
 extends Area2D
-class_name Spear
+class_name EnemySpear
 
-@export var speed: float = 500.0
-@export var damage: int = 1
-@export var lifetime: float = 4.0
+@export var speed:= 400.0
+@export var lifetime:= 3.0
 
-@onready var lifetime_timer = $LifetimeTimer
+var direction:= Vector2.ZERO
+var damage:= 10
 
-var direction: Vector2 = Vector2.ZERO
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var lifetime_timer: Timer = $LifetimeTimer
 
 func _ready() -> void:
+	# Setup lifetime timer
 	lifetime_timer.wait_time = lifetime
+	lifetime_timer.one_shot = true
+	lifetime_timer.timeout.connect(_on_lifetime_timeout)
 	lifetime_timer.start()
 	
-	lifetime_timer.timeout.connect(queue_free)
-	
+	# Connect collision
 	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
 
-
-# -----------------
-# LAUNCH SPEAR
-# -----------------
-func launch(dir: Vector2) -> void:
+func launch(dir: Vector2, dmg: int = 10) -> void:
 	direction = dir.normalized()
+	damage = dmg
+	
+	# Rotate spear to point in direction of travel
 	rotation = direction.angle()
 
-# ------------------
-# SPEAR MOVEMENT
-# ------------------
 func _physics_process(delta: float) -> void:
-	position += direction * speed * delta
+	if direction != Vector2.ZERO:
+		position += direction * speed * delta
 
-# -----------------------
-# COLLISION DETECTION
-# -----------------------
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		# TODO: hook into your player damage system
-		# body.take_damage(damage)
-
+func _on_body_entered(body: Node2D) -> void:
+	# Check if it hit the player
+	if body.is_in_group("player") or body.name == "Player":
+		if body.has_node("Health"):
+			var player_health: Health = body.get_node("Health")
+			player_health.take_damage(damage)
+			print("Player Health: " + str(player_health.current_health))
 		queue_free()
+
+func _on_area_entered(area: Area2D) -> void:
+	# Optionally destroy on hitting other areas (walls, shields, etc.)
+	if area.is_in_group("obstacle"):
+		queue_free()
+
+func _on_lifetime_timeout() -> void:
+	queue_free()

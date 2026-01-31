@@ -17,5 +17,4 @@ func _on_body_entered(body):
 		print("Enemy Health: " + str(target_health.current_health))
 	else:
 		print("No Health node found on ", body.name)
-	
 	queue_free()

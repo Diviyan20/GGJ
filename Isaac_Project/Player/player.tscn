@@ -599,6 +599,7 @@ position_smoothing_enabled = true
 
 [node name="Health" type="Node" parent="." unique_id=1698075313]
 script = ExtResource("5_k53q1")
+max_health = 100.0
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=601928955]
 scale = Vector2(3, 3)

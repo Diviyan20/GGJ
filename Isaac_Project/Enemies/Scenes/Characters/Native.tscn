@@ -159,3 +159,6 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2" unique_id=908276599]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_w2eo5")
+
+[node name="Health" parent="." index="3" unique_id=79193330]
+max_health = 150.0

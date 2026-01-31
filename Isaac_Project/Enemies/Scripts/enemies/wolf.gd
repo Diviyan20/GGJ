@@ -1,7 +1,7 @@
 extends EnemyBase
 class_name Wolf
 
-@export var damage: int =2
+@export var damage: int
 
 func _ready() -> void:
 	super._ready() # Initialize all attributes in EnemyBase
@@ -28,11 +28,13 @@ func _physics_process(delta: float) -> void:
 # TIMER CALLBACK
 # -----------------
 func _on_attack_timer_timeout() -> void:
-	# Deal damage if player is still in range
-	if player != null and global_position.distance_to(player.global_position) <= attack_range:
-		# TODO: call function for player to take damage
-		#player.take_damage(damage)
-		pass
+	# Check if the player has a health bar
+	if player and player.has_node("Health"):
+		var player_health: Health = player.get_node("Health")
+		
+		# Deal damage if player is still in range
+		if global_position.distance_to(player.global_position) <= attack_range:
+			player_health.take_damage(damage)
 	
 	# Reset state
 	can_attack = true

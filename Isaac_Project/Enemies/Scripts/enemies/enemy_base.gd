@@ -16,8 +16,9 @@ var player: CharacterBody2D
 @export var attack_range: float = 16.0
 
 # === NODES ===
-@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var anim_sprite: AnimatedSprite2D = $SuperSprite2D
 @onready var attack_timer: Timer = $AttackTimer
+@onready var health: Health = $Health
 
 
 func _ready() -> void:
@@ -39,26 +40,14 @@ func _ready() -> void:
 	# Configure Attack Timer
 	attack_timer.wait_time = data.attack_speed
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
+	
+	health.died.connect(_on_died)
 
 # -------------------
 # DAMAGE SYSTEM
 # -------------------
-func take_damage(base_damage: int, masked_multiplier: int) -> void:
-	# Final damage depends on masked matchup
-	var final_damage = int(base_damage * masked_multiplier)
-	current_health -= final_damage
-	
-	# Optional: Play hit flash or sound here
-	
-	if current_health <= 0:
-		die()
 
-# ---------------
-# ENEMY DEATH
-# ---------------
-func die() -> void:
-	drop_coins()
-	queue_free()
+
 
 func drop_coins() -> void:
 	# Spawn the coins when enemies are dead
@@ -112,3 +101,9 @@ func start_attack() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	can_attack = true
+
+# ----------------------------
+# SIGNAL FOR DAMAGE SYSTEM
+# ----------------------------
+func _on_died() -> void:
+	queue_free()

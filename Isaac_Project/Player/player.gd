@@ -1,13 +1,12 @@
 extends CharacterBody2D
+class_name Player
 
 @export var starting_mask: MaskData
 @export var spear_scene: PackedScene
 @export var aoe_radius := 96
 @export var move_speed := 100.0
-@export var max_hp := 100
 @export var starting_money := 0
 var money := 0
-var hp := max_hp
 var can_attack := true
 var current_mask: MaskData = null
 var aim_dir: Vector2 = Vector2.DOWN
@@ -16,14 +15,15 @@ var base_move_speed := move_speed
 var attack_speed_multiplier := 1.0
 
 @onready var hud = get_tree().get_first_node_in_group("hud")
+@onready var health: Health = $Health
 
 func _ready():
 	money = starting_money
 	update_money_ui()
-	hp = max_hp
 	if starting_mask:
 		equip_mask(starting_mask)
-	update_hp_bar()
+		
+	health.died.connect(_on_died)
 
 func update_money_ui():
 	if hud:
@@ -58,27 +58,6 @@ func get_move_speed() -> float:
 		speed *= current_mask.speed_multiplier
 	return speed * attack_speed_multiplier
 
-func take_damage(amount: int):
-	if current_mask and current_mask.has_shield:
-		return
-	hp -= amount
-	hp = max(hp, 0)
-	update_hp_bar()
-	
-	if hp <= 0:
-		die()
-
-func die():
-	print("Player died")
-	queue_free()
-
-func heal(amount: int):
-	hp = min(hp + amount, max_hp)
-	update_hp_bar()
-
-func update_hp_bar():
-	var percent := float(hp) / float(max_hp) * 100.0
-	$HPBarRoot/HPBar.value = percent
 
 
 func update_aim_direction():
@@ -145,6 +124,19 @@ func attack_godot():
 		if body.has_method("take_damage"):
 			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
 
+# ----------------
+# DAMAGE SYSTEM
+# ----------------
+func take_damage(amount: float) -> void:
+	health.take_damage(amount)
+
+func heal(amount: float) -> void:
+	health.heal(amount)
+
+func _on_died() -> void:
+	print("Player died")
+	# Game over logic here
+
 func add_money(amount: int):
 	money += amount
 	update_money_ui()
@@ -162,7 +154,7 @@ func spend_money(amount: int) -> bool:
 func apply_potion(potion: PotionData):
 	match potion.potion_name:
 		"Heal Potion":
-			heal(int(potion.value))
+			health.heal(5.0)
 
 		"Speed Potion":
 			_apply_speed_potion(potion)

@@ -1,15 +1,38 @@
 [gd_scene format=3 uid="uid://xggynabd8oi1"]
 
 [ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_84rq8"]
-[ext_resource type="PackedScene" uid="uid://2mpsiewoj0fb" path="res://Enemies/Scenes/Characters/Native.tscn" id="2_84rq8"]
-[ext_resource type="PackedScene" uid="uid://b1w4s7vbrykan" path="res://Enemies/Scenes/Weapons/EnemySpear.tscn" id="3_4vbnf"]
+[ext_resource type="PackedScene" uid="uid://c8v1d341odx3" path="res://Enemies/Scenes/Characters/Snake.tscn" id="3_4vbnf"]
+[ext_resource type="PackedScene" uid="uid://cc0dj53fujjjj" path="res://Enemies/Scenes/Spawner.tscn" id="4_oj7of"]
+[ext_resource type="PackedScene" uid="uid://2mpsiewoj0fb" path="res://Enemies/Scenes/Characters/Native.tscn" id="4_y4pre"]
 
 [node name="Testing" type="Node2D" unique_id=1434516048]
 
 [node name="Player" parent="." unique_id=125716725 instance=ExtResource("1_84rq8")]
 position = Vector2(296, 269)
 
-[node name="Native" parent="." unique_id=1433610574 instance=ExtResource("2_84rq8")]
-position = Vector2(560, 448)
-spear_scene = ExtResource("3_4vbnf")
-attack_range = 120.0
+[node name="Spawner" parent="." unique_id=651962104 node_paths=PackedStringArray("spawn_pos") instance=ExtResource("4_oj7of")]
+enemy_type = 1
+enemy_min_count = 5
+enemy_max_count = 10
+spawn_pos = [NodePath("Node2D"), NodePath("Node2D2"), NodePath("Node2D3"), NodePath("Node2D4")]
+offset_range_min = 7.27
+offset_range_max = 31.985
+spawn_interval = 0.5
+
+[node name="Node2D" type="Node2D" parent="Spawner" unique_id=850143952]
+position = Vector2(-82, 150)
+
+[node name="Node2D2" type="Node2D" parent="Spawner" unique_id=1553932163]
+position = Vector2(617, 70)
+
+[node name="Node2D3" type="Node2D" parent="Spawner" unique_id=962768886]
+position = Vector2(706, 159)
+
+[node name="Node2D4" type="Node2D" parent="Spawner" unique_id=1958344114]
+position = Vector2(669, 410)
+
+[node name="Snake" parent="." unique_id=1433610574 instance=ExtResource("3_4vbnf")]
+position = Vector2(612, 451)
+
+[node name="Native" parent="." unique_id=911657669 instance=ExtResource("4_y4pre")]
+position = Vector2(-84, 476)

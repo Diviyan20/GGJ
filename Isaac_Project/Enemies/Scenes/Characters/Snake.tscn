@@ -8,6 +8,7 @@
 [sub_resource type="Resource" id="Resource_7u0hu"]
 script = ExtResource("3_xk1hn")
 speed = 60.0
+coins_amount = 30
 metadata/_custom_type_script = "uid://cy1uqhys5wfqy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4o8u"]
@@ -76,11 +77,14 @@ animations = [{
 radius = 7.0
 height = 40.0
 
-[node name="EnemyBase" unique_id=1433610574 instance=ExtResource("1_ulclw")]
+[node name="Snake" unique_id=1433610574 instance=ExtResource("1_ulclw")]
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("2_l4o8u")
 damage = 2
 data = SubResource("Resource_7u0hu")
-attack_range = 40.0
+attack_range = 200.0
 
 [node name="SuperSprite2D" parent="." index="0" unique_id=1769319344]
 sprite_frames = SubResource("SpriteFrames_xk1hn")
@@ -91,3 +95,6 @@ frame_progress = 0.8489611
 position = Vector2(1, 9)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_dkr14")
+
+[node name="Health" parent="." index="3" unique_id=79193330]
+max_health = 50.0

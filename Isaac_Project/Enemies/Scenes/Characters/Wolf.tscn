@@ -10,6 +10,7 @@
 [sub_resource type="Resource" id="Resource_fjrfi"]
 script = ExtResource("2_b1ree")
 speed = 50.0
+coins_amount = 20
 metadata/_custom_type_script = "uid://cy1uqhys5wfqy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jsvdc"]
@@ -113,7 +114,10 @@ metadata/_custom_type_script = "uid://d4e8f77ihiagf"
 size = Vector2(30, 17)
 
 [node name="Wolf" unique_id=1433610574 instance=ExtResource("1_1d7fb")]
+scale = Vector2(2, 2)
 collision_layer = 2
+collision_mask = 2
+safe_margin = 3.0
 script = ExtResource("2_fjrfi")
 damage = 2
 data = SubResource("Resource_fjrfi")

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c0sg7afp8i8u0"]
+[gd_scene load_steps=0 format=3 uid="uid://c0sg7afp8i8u0"]
 
 [ext_resource type="Script" uid="uid://dqdycnxmynve" path="res://Scene/audio_manager.gd" id="1_q3mph"]
 

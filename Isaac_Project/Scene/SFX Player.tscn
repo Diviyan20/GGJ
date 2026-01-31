@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cqfmmr160hvhh"]
+[gd_scene load_steps=0 format=3 uid="uid://cqfmmr160hvhh"]
 
 [ext_resource type="Script" uid="uid://bkj1efc1c1ojg" path="res://Scene/sfx_player.gd" id="1_0ye5h"]
 

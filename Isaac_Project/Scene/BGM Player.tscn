@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c0sg7afp8i8u0"]
+
+[ext_resource type="Script" uid="uid://dqdycnxmynve" path="res://Scene/audio_manager.gd" id="1_q3mph"]
+
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_hybvu"]
+
+[node name="BGM Player" type="AudioStreamPlayer2D" unique_id=741485079]
+stream = SubResource("AudioStreamMP3_hybvu")
+parameters/looping = true
+script = ExtResource("1_q3mph")
+is_battle = true

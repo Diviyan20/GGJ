@@ -1,8 +1,18 @@
 [gd_scene format=3 uid="uid://ble0r8lt0mqom"]
 
+[ext_resource type="Script" uid="uid://gs6vw6qp8qrr" path="res://Enemies/Scripts/enemies/enemy_base.gd" id="1_e10o3"]
+[ext_resource type="Script" uid="uid://cy1uqhys5wfqy" path="res://Enemies/Scripts/data/enemy_data.gd" id="2_0xnws"]
+
+[sub_resource type="Resource" id="Resource_ywfkg"]
+script = ExtResource("2_0xnws")
+metadata/_custom_type_script = "uid://cy1uqhys5wfqy"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8v61r"]
+size = Vector2(20, 30)
 
 [node name="EnemyBase" type="CharacterBody2D" unique_id=1433610574]
+script = ExtResource("1_e10o3")
+data = SubResource("Resource_ywfkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=523726703]
 shape = SubResource("RectangleShape2D_8v61r")

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://2mpsiewoj0fb"]
+
+[ext_resource type="PackedScene" uid="uid://ble0r8lt0mqom" path="res://Enemies/Scenes/EnemyBase.tscn" id="1_oo72a"]
+[ext_resource type="Texture2D" uid="uid://dmj2ex82hugjg" path="res://Enemies/Assets/Placeholders/pngkey.com-blue-flame-png-668469_25percent_25percent.png" id="2_8ovvi"]
+[ext_resource type="Script" uid="uid://br0v3svh7vrqa" path="res://Enemies/Scripts/enemies/native.gd" id="2_uki6l"]
+[ext_resource type="Script" uid="uid://cy1uqhys5wfqy" path="res://Enemies/Scripts/data/enemy_data.gd" id="3_w2eo5"]
+
+[sub_resource type="Resource" id="Resource_ivhka"]
+script = ExtResource("3_w2eo5")
+speed = 200.0
+metadata/_custom_type_script = "uid://cy1uqhys5wfqy"
+
+[node name="EnemyBase" unique_id=1433610574 instance=ExtResource("1_oo72a")]
+script = ExtResource("2_uki6l")
+preferred_distance = 160.0
+attack_range = 220.0
+windup_time = 0.4
+spear_scene = null
+data = SubResource("Resource_ivhka")
+stop_distance = 300.0
+
+[node name="Sprite2D" parent="." index="1" unique_id=1640891959]
+texture_filter = 1
+texture = ExtResource("2_8ovvi")

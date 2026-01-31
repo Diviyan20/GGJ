@@ -11,6 +11,9 @@ var hp := max_hp
 var can_attack := true
 var current_mask: MaskData = null
 var aim_dir: Vector2 = Vector2.DOWN
+var owned_masks: Array[MaskData] = []
+var base_move_speed := move_speed
+var attack_speed_multiplier := 1.0
 
 @onready var hud = get_tree().get_first_node_in_group("hud")
 
@@ -29,6 +32,8 @@ func update_money_ui():
 
 func equip_mask(mask: MaskData):
 	current_mask = mask
+	if not owned_masks.has(mask):
+		owned_masks.append(mask)
 	print("Equipped mask:", mask.mask_name)
 
 func _physics_process(delta):
@@ -48,9 +53,10 @@ func handle_movement():
 	move_and_slide()
 
 func get_move_speed() -> float:
+	var speed := move_speed
 	if current_mask:
-		return move_speed * current_mask.speed_multiplier
-	return move_speed
+		speed *= current_mask.speed_multiplier
+	return speed * attack_speed_multiplier
 
 func take_damage(amount: int):
 	if current_mask and current_mask.has_shield:
@@ -102,7 +108,9 @@ func perform_attack():
 		"Godot":
 			attack_godot()
 
-	await get_tree().create_timer(current_mask.attack_cooldown).timeout
+	await get_tree().create_timer(
+	current_mask.attack_cooldown * attack_speed_multiplier
+).timeout
 	can_attack = true
 
 func attack_native():
@@ -150,3 +158,24 @@ func spend_money(amount: int) -> bool:
 	money -= amount
 	update_money_ui()
 	return true
+
+func apply_potion(potion: PotionData):
+	match potion.potion_name:
+		"Heal Potion":
+			heal(int(potion.value))
+
+		"Speed Potion":
+			_apply_speed_potion(potion)
+
+		"Attack Speed Potion":
+			_apply_attack_speed_potion(potion)
+
+func _apply_speed_potion(potion: PotionData):
+	move_speed *= potion.value
+	await get_tree().create_timer(potion.duration).timeout
+	move_speed /= potion.value
+
+func _apply_attack_speed_potion(potion: PotionData):
+	attack_speed_multiplier *= potion.value
+	await get_tree().create_timer(potion.duration).timeout
+	attack_speed_multiplier /= potion.value

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Isaac Project"
-run/main_scene="uid://b8408nsgkhbm4"
+run/main_scene="uid://cq0ucnc5o66hv"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

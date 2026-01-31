@@ -6,6 +6,10 @@
 [ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="3_48bui"]
 [ext_resource type="Resource" uid="uid://bbalv8ihnk3lm" path="res://Data/Masks/Wolf/WolfMask.tres" id="4_jwkd6"]
 [ext_resource type="Resource" uid="uid://cjjoyodi8qa4k" path="res://Data/Masks/Godot Mask/GodotMask.tres" id="5_5ub8i"]
+[ext_resource type="Script" uid="uid://hincu7syigwm" path="res://Prefab/Potion/potion_data.gd" id="6_hgpad"]
+[ext_resource type="Resource" uid="uid://71lrmiiks217" path="res://Prefab/Potion/Heal Potion.tres" id="7_sbvvu"]
+[ext_resource type="Resource" uid="uid://cd74mxvmi3u38" path="res://Prefab/Potion/Speed Potion.tres" id="8_ja4rg"]
+[ext_resource type="Resource" uid="uid://bb70r2hhtwmcf" path="res://Prefab/Potion/Attack Speed Potion.tres" id="9_dfjo2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g267c"]
 size = Vector2(47, 62)
@@ -17,6 +21,12 @@ prices = Dictionary[String, int]({
 "Godot": 80,
 "Native": 20,
 "Wolf": 40
+})
+potions_for_sale = Array[ExtResource("6_hgpad")]([ExtResource("7_sbvvu"), ExtResource("8_ja4rg"), ExtResource("9_dfjo2")])
+potion_prices = Dictionary[String, int]({
+"Attack Speed Potion": 50,
+"Heal Potion": 20,
+"Speed Potion": 40
 })
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=728673942]

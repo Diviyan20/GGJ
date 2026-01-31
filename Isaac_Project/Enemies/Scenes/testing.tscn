@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://xggynabd8oi1"]
 
 [ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_84rq8"]
-[ext_resource type="PackedScene" uid="uid://dvbjyaq18yf8f" path="res://Enemies/Scenes/Characters/Wolf.tscn" id="2_84rq8"]
+[ext_resource type="PackedScene" uid="uid://2mpsiewoj0fb" path="res://Enemies/Scenes/Characters/Native.tscn" id="2_84rq8"]
+[ext_resource type="PackedScene" uid="uid://b1w4s7vbrykan" path="res://Enemies/Scenes/Weapons/EnemySpear.tscn" id="3_4vbnf"]
 
 [node name="Testing" type="Node2D" unique_id=1434516048]
 
 [node name="Player" parent="." unique_id=125716725 instance=ExtResource("1_84rq8")]
 position = Vector2(296, 269)
 
-[node name="Wolf" parent="." unique_id=1433610574 instance=ExtResource("2_84rq8")]
-position = Vector2(570, 418)
+[node name="Native" parent="." unique_id=1433610574 instance=ExtResource("2_84rq8")]
+position = Vector2(560, 448)
+spear_scene = ExtResource("3_4vbnf")
+attack_range = 120.0

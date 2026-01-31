@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b1w4s7vbrykan"]
+
+[ext_resource type="Script" uid="uid://ceyafdvlndu3n" path="res://Enemies/Scripts/weapons/spear.gd" id="1_okpar"]
+[ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="1_yrft4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrft4"]
+size = Vector2(32, 10)
+
+[node name="Spear" type="Area2D" unique_id=477201247]
+collision_layer = 8
+script = ExtResource("1_okpar")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1608752883]
+texture_filter = 1
+rotation = 1.5707964
+texture = ExtResource("1_yrft4")
+region_enabled = true
+region_rect = Rect2(203, 384, 10, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=7512741]
+shape = SubResource("RectangleShape2D_yrft4")
+
+[node name="LifetimeTimer" type="Timer" parent="." unique_id=1592047789]
+wait_time = 3.0
+one_shot = true

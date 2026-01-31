@@ -3,42 +3,34 @@ class_name Player
 
 @export var starting_mask: MaskData
 @export var spear_scene: PackedScene
-@export var godot_aoe_scene: PackedScene
 @export var aoe_radius := 96
 @export var move_speed := 100.0
 @export var starting_money := 0
 var money := 0
 var can_attack := true
 var current_mask: MaskData = null
-var current_mask_name := ""
 var aim_dir: Vector2 = Vector2.DOWN
 var owned_masks: Array[MaskData] = []
 var base_move_speed := move_speed
 var attack_speed_multiplier := 1.0
 
-enum Facing { FRONT, BACK, SIDE }
-var facing := Facing.FRONT
-
 @onready var hud = get_tree().get_first_node_in_group("hud")
-@onready var mask_sprite_main: AnimatedSprite2D = $MaskSprite2
 @onready var health: Health = $Health
+
+# Animation
+enum mask_type {None, Godot, Native, Wolf}
+@export var current_mask_sprite: mask_type = mask_type.Godot
+@onready var player_anim := $PlayerSprite
+@onready var mask_anim := $MaskSprite
+var direction: Vector2
+var current_facing: String = "front"
 
 func _ready():
 	money = starting_money
 	update_money_ui()
-
-	hp = max_hp
-	update_hp_bar()
-
-	mask_sprite_main.visible = false
-
 	if starting_mask:
 		equip_mask(starting_mask)
-	
-func change_mask(anim_name:String):
-	mask_sprite_main.play(anim_name)
-	if starting_mask:
-		equip_mask(starting_mask)
+	change_mask(current_mask_sprite)
 		
 	health.died.connect(_on_died)
 
@@ -48,89 +40,44 @@ func update_money_ui():
 
 
 func equip_mask(mask: MaskData):
-	# If a mask is already equipped → destroy it first
-	if current_mask_name != "":
-		await _play_mask_destroy(current_mask_name)
-
 	current_mask = mask
-	current_mask_name = mask.mask_name
-
-	# Equip new mask
-	await _play_mask_equip(mask.mask_name)
-
+	if not owned_masks.has(mask):
+		owned_masks.append(mask)
 	print("Equipped mask:", mask.mask_name)
 
-func _play_mask_destroy(mask_name: String):
-	var anim_name := "destroy_%s" % mask_name.to_lower()
 
-	if not mask_sprite_main.sprite_frames.has_animation(anim_name):
-		return
-
-	mask_sprite_main.visible = true
-	mask_sprite_main.play(anim_name)
-
-	await mask_sprite_main.animation_finished
-
-	mask_sprite_main.visible = false
-
-func _play_mask_equip(mask_name: String):
-	var anim_name := "equip_%s" % mask_name.to_lower()
-
-	if not mask_sprite_main.sprite_frames.has_animation(anim_name):
-		push_error("Missing animation: " + anim_name)
-		return
-
-	mask_sprite_main.visible = true
-	mask_sprite_main.play(anim_name)
-
-	await mask_sprite_main.animation_finished
-
-
-#func _set_mask_texture(mask_name: String):
-	#match mask_name:
-		#"Wolf":
-			#$MaskSprite.texture = preload("res://Sprite/mask/tile162.png")
-		#"Native":
-			#$MaskSprite.texture = preload("res://Sprite/mask/tile161.png")
-		#"Godot":
-			#$MaskSprite.texture = preload("res://Sprite/mask/tile160.png")
+func Movement():
+	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
+	# player_animation
+	if direction.y > 0:
+		current_facing = "front"
+	elif direction.y < 0:
+		current_facing = "back"
+	elif direction.x > 0:
+		current_facing = "right"
+	elif direction.x < 0:
+		current_facing = "left"
+func Char_player_animation():
+	if direction == Vector2.ZERO:
+		player_anim.play("Idle_"+current_facing)
+	else:
+		player_anim.play("Walk_"+current_facing)
+func change_mask(mask: mask_type):
+	if current_mask_sprite != mask_type.None:
+		mask_anim.play(mask_type.keys()[current_mask_sprite]+"_off")
+	await mask_anim.animation_finished
+	current_mask_sprite = mask
+	if mask == mask_type.None:
+		mask_anim.hide()
+	else:
+		mask_anim.show()
+		mask_anim.play(mask_type.keys()[current_mask_sprite]+"_on")
 
 func _physics_process(delta):
+	Movement()
+	Char_player_animation()
 	handle_movement()
 	update_aim_direction()
-
-func update_facing(input_dir: Vector2):
-	if input_dir == Vector2.ZERO:
-		return
-
-	if abs(input_dir.x) > abs(input_dir.y):
-		facing = Facing.SIDE
-	else:
-		if input_dir.y < 0:
-			facing = Facing.BACK
-		else:
-			facing = Facing.FRONT
-
-func update_sprite(input_dir: Vector2):
-	var sprite := $Sprite2D
-	var anim := $Sprite2D/AnimationPlayer
-
-
-	match facing:
-		Facing.FRONT:
-			anim.play("walk_backward")
-			sprite.flip_h = false
-
-		Facing.BACK:
-			anim.play("walk_forward")
-			sprite.flip_h = false
-
-		Facing.SIDE:
-			anim.play("walk_side")
-			sprite.flip_h = input_dir.x < 0
-
-
-
 
 func handle_movement():
 	var input_dir := Vector2(
@@ -140,10 +87,8 @@ func handle_movement():
 
 	if input_dir.length() > 0:
 		input_dir = input_dir.normalized()
-		update_facing(input_dir)
-		update_sprite(input_dir)
 
-	velocity = input_dir * get_move_speed()
+	velocity = input_dir * move_speed
 	move_and_slide()
 
 func get_move_speed() -> float:
@@ -151,30 +96,6 @@ func get_move_speed() -> float:
 	if current_mask:
 		speed *= current_mask.speed_multiplier
 	return speed * attack_speed_multiplier
-
-func take_damage(amount: int, attacker_mask := ""):
-	if current_mask and current_mask.has_shield:
-		return
-
-	hp -= amount
-	hp = max(hp, 0)
-	update_hp_bar()
-
-	if hp <= 0:
-		die()
-
-func die():
-	print("Player died")
-	queue_free()
-
-func heal(amount: int):
-	hp = min(hp + amount, max_hp)
-	update_hp_bar()
-
-func update_hp_bar():
-	var percent := float(hp) / float(max_hp) * 100.0
-	$HPBarRoot/HPBar.value = percent
-
 
 func update_aim_direction():
 	var dir := Vector2(
@@ -211,11 +132,8 @@ func perform_attack():
 func attack_native():
 	var spear = spear_scene.instantiate()
 	get_parent().add_child(spear)
-
 	spear.global_position = global_position
 	spear.direction = aim_dir
-	spear.rotation = aim_dir.angle()
-
 	spear.damage = current_mask.attack_damage
 
 func attack_wolf():
@@ -223,18 +141,18 @@ func attack_wolf():
 	$AttackArea.rotation = aim_dir.angle()
 
 	for body in $AttackArea.get_overlapping_bodies():
-		if body == self:
-			continue
-		if body.has_method("take_damage"):
-			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
+		if body.has_node("Health"):
+			var enemy_health: Health = body.get_node("Health")
+			enemy_health.take_damage(current_mask.attack_damage)
+			print("Enemy Damaged")
+		else:
+			push_warning("Code not executed")
 
 func attack_godot():
 	var space_state = get_world_2d().direct_space_state
-
 	var query = PhysicsShapeQueryParameters2D.new()
 	var shape = CircleShape2D.new()
 	shape.radius = aoe_radius
-
 	query.shape = shape
 	query.transform = Transform2D(0, global_position)
 
@@ -242,8 +160,9 @@ func attack_godot():
 
 	for result in results:
 		var body = result.collider
-		if body.has_method("take_damage"):
-			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
+		if body.has_node("Health"):
+			var enemy_health: Health = body.get_node("Health")
+			enemy_health.take_damage(current_mask.attack_damage)
 
 # ----------------
 # DAMAGE SYSTEM

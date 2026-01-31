@@ -26,7 +26,7 @@ func _ready() -> void:
 	if data == null:
 		push_warning("Enemy has no EnemyData assigned!")
 		return
-	current_health = data.health
+	#current_health = data.health
 	can_attack = true
 	
 	if player == null:

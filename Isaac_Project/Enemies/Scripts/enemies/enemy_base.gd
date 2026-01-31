@@ -13,7 +13,7 @@ var player: CharacterBody2D
 
 # === CHASE SETTINGS ===
 @export var chase_enabled: bool = true
-@export var stop_distance: float = 16.0
+@export var attack_range: float = 16.0
 
 # === NODES ===
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -77,7 +77,7 @@ func chase_player(delta: float) -> void:
 	var distance = to_player.length()
 	
 	# Stop if too close (Prevents jitter and stacking)
-	if distance <= stop_distance:
+	if distance <= attack_range:
 		velocity = Vector2.ZERO
 	else:
 		velocity = to_player.normalized() * data.speed

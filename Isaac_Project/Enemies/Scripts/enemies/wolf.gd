@@ -1,7 +1,6 @@
 extends EnemyBase
 class_name Wolf
 
-@export var attack_range: float  = 50.0 # Distance to trigger melee attack
 @export var damage: int =2
 
 func _ready() -> void:

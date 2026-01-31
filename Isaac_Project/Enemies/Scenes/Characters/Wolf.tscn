@@ -147,9 +147,9 @@ size = Vector2(34, 28)
 
 [node name="Wolf" unique_id=1433610574 instance=ExtResource("1_1d7fb")]
 script = ExtResource("2_fjrfi")
-attack_range = 50.0
 damage = 2
 data = SubResource("Resource_fjrfi")
+attack_range = 50.0
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1669407395]
 sprite_frames = SubResource("SpriteFrames_b1ree")

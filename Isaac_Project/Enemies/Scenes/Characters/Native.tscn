@@ -10,6 +10,9 @@ script = ExtResource("3_w2eo5")
 speed = 200.0
 metadata/_custom_type_script = "uid://cy1uqhys5wfqy"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2eo5"]
+size = Vector2(20, 26)
+
 [node name="EnemyBase" unique_id=1433610574 instance=ExtResource("1_oo72a")]
 script = ExtResource("2_uki6l")
 preferred_distance = 160.0
@@ -19,6 +22,10 @@ spear_scene = null
 data = SubResource("Resource_ivhka")
 stop_distance = 300.0
 
-[node name="Sprite2D" parent="." index="1" unique_id=1640891959]
+[node name="Sprite2D" parent="." index="0" unique_id=1640891959]
 texture_filter = 1
 texture = ExtResource("2_8ovvi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2" unique_id=908276599]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_w2eo5")

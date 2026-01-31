@@ -15,7 +15,7 @@ var player: CharacterBody2D
 @export var stop_distance: float = 16.0
 
 # === NODES ===
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
 
 
@@ -25,6 +25,7 @@ func _ready() -> void:
 		push_warning("Enemy has no EnemyData assigned!")
 		return
 	current_health = data.health
+	can_attack = true
 	
 	if player == null:
 		player = get_tree().current_scene.get_node("Player")
@@ -40,7 +41,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if player == null:
-		push_warning("Player Node not Found!")
 		return
 	chase_player(delta)
 

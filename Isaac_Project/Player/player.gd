@@ -1,14 +1,13 @@
 extends CharacterBody2D
+class_name Player
 
 @export var starting_mask: MaskData
 @export var spear_scene: PackedScene
 @export var godot_aoe_scene: PackedScene
 @export var aoe_radius := 96
 @export var move_speed := 100.0
-@export var max_hp := 100
 @export var starting_money := 0
 var money := 0
-var hp := max_hp
 var can_attack := true
 var current_mask: MaskData = null
 var current_mask_name := ""
@@ -22,6 +21,7 @@ var facing := Facing.FRONT
 
 @onready var hud = get_tree().get_first_node_in_group("hud")
 @onready var mask_sprite_main: AnimatedSprite2D = $MaskSprite2
+@onready var health: Health = $Health
 
 func _ready():
 	money = starting_money
@@ -37,6 +37,10 @@ func _ready():
 	
 func change_mask(anim_name:String):
 	mask_sprite_main.play(anim_name)
+	if starting_mask:
+		equip_mask(starting_mask)
+		
+	health.died.connect(_on_died)
 
 func update_money_ui():
 	if hud:
@@ -241,6 +245,19 @@ func attack_godot():
 		if body.has_method("take_damage"):
 			body.take_damage(current_mask.attack_damage, current_mask.mask_name)
 
+# ----------------
+# DAMAGE SYSTEM
+# ----------------
+func take_damage(amount: float) -> void:
+	health.take_damage(amount)
+
+func heal(amount: float) -> void:
+	health.heal(amount)
+
+func _on_died() -> void:
+	print("Player died")
+	# Game over logic here
+
 func add_money(amount: int):
 	money += amount
 	update_money_ui()
@@ -258,7 +275,7 @@ func spend_money(amount: int) -> bool:
 func apply_potion(potion: PotionData):
 	match potion.potion_name:
 		"Heal Potion":
-			heal(int(potion.value))
+			health.heal(5.0)
 
 		"Speed Potion":
 			_apply_speed_potion(potion)

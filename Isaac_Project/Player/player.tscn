@@ -458,3 +458,5 @@ zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 
 [node name="GodotMemeAOE" parent="." unique_id=566354008 instance=ExtResource("4_k53q1")]
+[node name="Health" type="Node" parent="." unique_id=1698075313]
+script = ExtResource("5_k53q1")

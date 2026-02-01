@@ -1,17 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://baaxsj75dblww"]
+[gd_scene format=3 uid="uid://baaxsj75dblww"]
 
-[ext_resource type="Script" uid="uid://cqwgascbqscr2" path="res://UI/main_menu.gd" id="1_uahxu"]
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_uahxu"]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" unique_id=258926757]
 script = ExtResource("1_uahxu")
 
-[node name="ButtonManager" type="Control" parent="."]
+[node name="ButtonManager" type="Control" parent="." unique_id=625489656]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Start" type="Button" parent="ButtonManager"]
+[node name="Start" type="Button" parent="ButtonManager" unique_id=1634891936]
 layout_mode = 0
 offset_left = 450.0
 offset_top = 200.0
@@ -19,7 +19,9 @@ offset_right = 650.0
 offset_bottom = 275.0
 text = "Start Game"
 
-[node name="Setting" type="Button" parent="ButtonManager"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ButtonManager/Start" unique_id=1495551767]
+
+[node name="Setting" type="Button" parent="ButtonManager" unique_id=668583448]
 layout_mode = 0
 offset_left = 450.0
 offset_top = 300.0
@@ -27,13 +29,17 @@ offset_right = 650.0
 offset_bottom = 375.0
 text = "Setting"
 
-[node name="Quit" type="Button" parent="ButtonManager"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ButtonManager/Setting" unique_id=145141284]
+
+[node name="Quit" type="Button" parent="ButtonManager" unique_id=7043206]
 layout_mode = 0
 offset_left = 450.0
 offset_top = 400.0
 offset_right = 650.0
 offset_bottom = 475.0
 text = "Quit Game"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ButtonManager/Quit" unique_id=2125424873]
 
 [connection signal="pressed" from="ButtonManager/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="ButtonManager/Setting" to="." method="_on_setting_pressed"]

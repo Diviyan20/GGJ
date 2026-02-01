@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PotionData" format=3 uid="uid://bb70r2hhtwmcf"]
+
+[ext_resource type="Script" uid="uid://hincu7syigwm" path="res://Prefab/Potion/potion_data.gd" id="1_xqom5"]
+
+[resource]
+script = ExtResource("1_xqom5")
+potion_name = "Attack Speed Potion"
+duration = 240.0
+value = 0.5
+metadata/_custom_type_script = "uid://hincu7syigwm"

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="MaskData" format=3 uid="uid://d1fu15gvdvrq8"]
 
+[ext_resource type="Texture2D" uid="uid://ce1nq5hv7tcbi" path="res://Sprite/mask/tile161.png" id="1_hhkec"]
 [ext_resource type="Script" uid="uid://coskmirg14acb" path="res://Data/Masks/MaskData.gd" id="1_lrrls"]
 
 [resource]
@@ -8,4 +9,5 @@ mask_name = "Native"
 attack_damage = 15
 attack_cooldown = 0.2
 strong_against = "Wolf"
+icon = ExtResource("1_hhkec")
 metadata/_custom_type_script = "uid://coskmirg14acb"

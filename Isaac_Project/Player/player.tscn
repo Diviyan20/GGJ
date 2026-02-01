@@ -3,14 +3,95 @@
 [ext_resource type="Script" uid="uid://dnvxvk3mocoyj" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="3_k53q1"]
+[ext_resource type="Texture2D" uid="uid://w43xa6ded1hr" path="res://Sprite/pixel_art_sword_slash_sprites.png" id="4_fhl08"]
 [ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="5_fhl08"]
 [ext_resource type="Script" uid="uid://cpu1ntlwe7mgv" path="res://Damage System/health.gd" id="5_k53q1"]
+[ext_resource type="Texture2D" uid="uid://cuy4sbqykoe8a" path="res://Sprite/Sprite sheet 1.png" id="5_vtle1"]
+[ext_resource type="Script" uid="uid://110xr8a1quo0" path="res://Player/camera_2d.gd" id="6_od3ui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4lon"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(0, 0, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32uw3"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(64, 0, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac8n6"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(128, 0, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bga3"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(0, 47, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhliw"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(64, 47, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11wp0"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(128, 47, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11slg"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(0, 94, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7sh4"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(64, 94, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhogf"]
+atlas = ExtResource("4_fhl08")
+region = Rect2(128, 94, 64, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_286oo"]
+atlas = ExtResource("5_vtle1")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_286oo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4lon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32uw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac8n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bga3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhliw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11wp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11slg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7sh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhogf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_286oo")
+}],
+"loop": false,
+"name": &"wolf_swing",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btcbx"]
+radius = 60.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
 size = Vector2(121, 120)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_btcbx"]
-radius = 326.20392
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtle1"]
 atlas = ExtResource("5_fhl08")
@@ -570,15 +651,26 @@ starting_mask = ExtResource("2_gwnis")
 spear_scene = ExtResource("3_k53q1")
 move_speed = 150.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=800362068]
-position = Vector2(0.5, 0)
-scale = Vector2(0.4, 0.4)
-shape = SubResource("RectangleShape2D_4ntmi")
+[node name="WolfAttackEffect" type="AnimatedSprite2D" parent="." unique_id=1965139439]
+z_index = 10
+position = Vector2(80, 0)
+scale = Vector2(2.5, 3)
+sprite_frames = SubResource("SpriteFrames_286oo")
+animation = &"wolf_swing"
+frame = 9
+frame_progress = 1.0
+speed_scale = 2.0
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1887239872]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=2050550397]
+position = Vector2(75, 0)
 shape = SubResource("CircleShape2D_btcbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=800362068]
+position = Vector2(0.5, 0)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("RectangleShape2D_4ntmi")
 
 [node name="HPBarRoot" type="Node2D" parent="." unique_id=1750352440]
 z_index = 10
@@ -596,6 +688,7 @@ tint_progress = Color(0, 1, 0.5137255, 1)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1088140997]
 zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
+script = ExtResource("6_od3ui")
 
 [node name="Health" type="Node" parent="." unique_id=1698075313]
 script = ExtResource("5_k53q1")

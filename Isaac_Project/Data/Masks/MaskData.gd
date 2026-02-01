@@ -7,3 +7,4 @@ class_name MaskData
 @export var speed_multiplier := 1.0
 @export var has_shield := false
 @export var strong_against: String
+@export var icon: Texture2D

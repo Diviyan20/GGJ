@@ -46,3 +46,6 @@ func count_dead():
 	current_enemy_count -= 1;
 	if current_enemy_count <= 0:
 		is_wave_complete = true;
+	if is_wave_complete:
+		spawn_enemy();
+	

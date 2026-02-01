@@ -19,22 +19,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
+offset_left = -300.0
 offset_top = -100.0
-offset_right = 250.0
+offset_right = 300.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Mask" type="Label" parent="Panel" unique_id=931439981]
-layout_mode = 0
-offset_left = 230.0
-offset_top = 38.0
-offset_right = 271.0
-offset_bottom = 61.0
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.5
+offset_right = 20.5
+offset_bottom = 23.0
+grow_horizontal = 2
 text = "Mask"
 
 [node name="MaskList" type="HBoxContainer" parent="Panel" unique_id=682553623]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,30 +47,39 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -37.0
+offset_top = -61.0
 offset_right = 20.0
-offset_bottom = 3.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Potion" type="Label" parent="Panel" unique_id=166921041]
-layout_mode = 0
-offset_left = 230.0
-offset_top = 114.0
-offset_right = 281.0
-offset_bottom = 137.0
-text = "Potion"
-
-[node name="PotionList" type="HBoxContainer" parent="Panel" unique_id=711028003]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -25.5
+offset_top = -11.5
+offset_right = 25.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Potion"
+
+[node name="PotionList" type="HBoxContainer" parent="Panel" unique_id=711028003]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
 offset_top = 37.0
-offset_right = 20.0
+offset_right = 23.0
 offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2

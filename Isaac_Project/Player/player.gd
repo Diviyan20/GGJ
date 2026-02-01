@@ -15,6 +15,7 @@ var base_move_speed := move_speed
 var attack_speed_multiplier := 1.0
 
 @onready var hud = get_tree().get_first_node_in_group("hud")
+@onready var wolf_attack_fx: AnimatedSprite2D = $WolfAttackEffect
 @onready var health: Health = $Health
 
 # Animation
@@ -173,16 +174,28 @@ func attack_native():
 	spear.damage = current_mask.attack_damage
 
 func attack_wolf():
-	$AttackArea.global_position = global_position + aim_dir * 32
+	# 1️⃣ Position & rotate attack area
+	$AttackArea.global_position = global_position + aim_dir * 35
 	$AttackArea.rotation = aim_dir.angle()
 
+	# 2️⃣ Play swing effect
+	wolf_attack_fx.visible = true
+	wolf_attack_fx.global_position = $AttackArea.global_position;
+	wolf_attack_fx.rotation = $AttackArea.rotation;
+	wolf_attack_fx.play("wolf_swing")
+	$Camera2D.offset = Vector2(randf_range(-2,2), randf_range(-2,2))
+
+	# 3️⃣ Deal damage to enemies in range
 	for body in $AttackArea.get_overlapping_bodies():
+		if body == self:
+			continue
 		if body.has_node("Health"):
 			var enemy_health: Health = body.get_node("Health")
 			enemy_health.take_damage(current_mask.attack_damage)
-			print("Enemy Damaged")
-		else:
-			push_warning("Code not executed")
+
+	# 4️⃣ Hide effect after animation
+	await wolf_attack_fx.animation_finished
+	wolf_attack_fx.visible = false
 
 func attack_godot():
 	var space_state = get_world_2d().direct_space_state
@@ -206,6 +219,8 @@ func attack_godot():
 func take_damage(amount: float) -> void:
 	health.take_damage(amount)
 	
+	var camera := $Camera2D
+	camera.shake(1.0)
 
 func heal(amount: float) -> void:
 	health.heal(amount)

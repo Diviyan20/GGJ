@@ -15,6 +15,10 @@ run/main_scene="uid://cq0ucnc5o66hv"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[global_group]
+
+"Camera Collider"="Tracks camera collider group"
+
 [input]
 
 ui_left={

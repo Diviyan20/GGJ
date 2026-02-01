@@ -5,6 +5,9 @@
 [ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="3_k53q1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gwnis"]
+size = Vector2(49, 48)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
 size = Vector2(121, 120)
 
@@ -16,6 +19,12 @@ script = ExtResource("1_4ntmi")
 starting_mask = ExtResource("2_gwnis")
 spear_scene = ExtResource("3_k53q1")
 move_speed = 150.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=403121923 groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1942275503]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_gwnis")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=960359477]
 scale = Vector2(0.4, 0.4)
@@ -45,7 +54,3 @@ value = 100.0
 tint_progress = Color(0, 1, 0.5137255, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1411724628]
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1088140997]
-zoom = Vector2(1.2, 1.2)
-position_smoothing_enabled = true

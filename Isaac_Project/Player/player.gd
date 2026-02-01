@@ -29,7 +29,6 @@ func update_money_ui():
 	if hud:
 		hud.set_money(money)
 
-
 func equip_mask(mask: MaskData):
 	current_mask = mask
 	if not owned_masks.has(mask):

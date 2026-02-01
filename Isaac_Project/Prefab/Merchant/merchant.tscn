@@ -24,7 +24,7 @@ prices = Dictionary[String, int]({
 })
 potions_for_sale = Array[ExtResource("6_hgpad")]([ExtResource("7_sbvvu"), ExtResource("8_ja4rg"), ExtResource("9_dfjo2")])
 potion_prices = Dictionary[String, int]({
-"Attack Speed Potion": 50,
+"Attack Potion": 30,
 "Heal Potion": 20,
 "Speed Potion": 40
 })

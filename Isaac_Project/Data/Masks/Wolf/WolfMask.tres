@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="MaskData" format=3 uid="uid://bbalv8ihnk3lm"]
 
+[ext_resource type="Texture2D" uid="uid://cm6y44j0wv85s" path="res://Sprite/mask/tile162.png" id="1_qu18y"]
 [ext_resource type="Script" uid="uid://coskmirg14acb" path="res://Data/Masks/MaskData.gd" id="1_s57ac"]
 
 [resource]
@@ -9,4 +10,5 @@ attack_damage = 20
 attack_cooldown = 0.3
 speed_multiplier = 1.2
 strong_against = "Snake"
+icon = ExtResource("1_qu18y")
 metadata/_custom_type_script = "uid://coskmirg14acb"

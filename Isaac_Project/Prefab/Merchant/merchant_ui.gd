@@ -19,12 +19,10 @@ func open(m, p):
 	populate_potions()
 
 func refresh():
-	# Clear old buttons
 	for c in mask_list.get_children():
 		c.queue_free()
 
 	for mask in merchant.masks_for_sale:
-		# ❌ Skip owned masks
 		if player.owned_masks.has(mask):
 			continue
 
@@ -33,8 +31,13 @@ func refresh():
 
 		var price = merchant.prices[mask.mask_name]
 
-		var btn = Button.new()
-		btn.text = "%s - $%d" % [mask.mask_name, price]
+		var btn := Button.new()
+		btn.text = "%s\n$%d" % [mask.mask_name, price]
+		btn.icon = mask.icon
+		btn.expand_icon = true
+		btn.custom_minimum_size = Vector2(160, 64)
+		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+
 		btn.pressed.connect(func():
 			buy_mask(mask, price)
 		)
@@ -58,8 +61,13 @@ func populate_potions():
 			continue
 
 		var price = merchant.potion_prices[potion.potion_name]
-		var btn = Button.new()
-		btn.text = "%s - $%d" % [potion.potion_name, price]
+
+		var btn := Button.new()
+		btn.text = "%s\n$%d" % [potion.potion_name, price]
+		btn.icon = potion.icon
+		btn.expand_icon = true
+		btn.custom_minimum_size = Vector2(160, 64)
+		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 
 		btn.pressed.connect(func():
 			buy_potion(potion, price)

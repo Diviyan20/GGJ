@@ -1,8 +1,12 @@
 extends Area2D
 class_name EnemySpawner
 
+signal wave_started(current_wave: int, total_wave: int)
+signal room_cleared
+
 enum ENEMY_TYPES {NATIVE, WOLF, SNAKE}
 
+@onready var hud = get_parent().get_node("HUD")
 @export var enemy_type: ENEMY_TYPES = ENEMY_TYPES.NATIVE
 @export var wave_count: int = 3
 @export var enemy_min_count: int = 3
@@ -35,6 +39,9 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	
+	wave_started.connect(_on_wave_started)
+	room_cleared.connect(_on_room_cleared)
+	
 	# Setup collision to detect player
 	collision_layer = 0  # Spawner doesn't need to be on a layer
 	collision_mask = 1   # Detect layer 1 (Player)
@@ -56,6 +63,7 @@ func spawn_enemy():
 	while current_wave_count < wave_count:
 		if is_wave_complete: 
 			is_wave_complete = false
+			emit_signal("wave_started", current_wave_count + 1, wave_count)
 			var spawn_amount = randi_range(enemy_min_count, enemy_max_count)
 			current_enemy_count = spawn_amount
 			
@@ -95,6 +103,7 @@ func spawn_enemy():
 		await wave_completed()
 	
 	print("All waves complete!")
+	emit_signal("room_cleared")
 
 func get_circle_position(center: Vector2, index: int, total: int) -> Vector2:
 	var angle = (TAU / total) * index  # Evenly distribute around circle
@@ -137,3 +146,9 @@ func count_dead() -> void:
 func wave_completed() -> void:
 	while not is_wave_complete:
 		await get_tree().create_timer(0.5).timeout
+
+func _on_wave_started(current: int, total: int):
+	hud.set_wave(current, total)
+
+func _on_room_cleared():
+	hud.show_room_clear()

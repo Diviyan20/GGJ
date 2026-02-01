@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="5_fhl08"]
 [ext_resource type="Script" uid="uid://cpu1ntlwe7mgv" path="res://Damage System/health.gd" id="5_k53q1"]
 [ext_resource type="Texture2D" uid="uid://cuy4sbqykoe8a" path="res://Sprite/Sprite sheet 1.png" id="5_vtle1"]
-[ext_resource type="Script" uid="uid://110xr8a1quo0" path="res://Player/camera_2d.gd" id="6_od3ui"]
 [ext_resource type="Texture2D" uid="uid://cvh7ujv2js8pk" path="res://Sprite/Light/light 2.jpg" id="9_00tjw"]
 [ext_resource type="PackedScene" uid="uid://cf5u0vvos1fal" path="res://Data/Masks/Godot Mask/GodotAOE.tscn" id="10_x3vf3"]
 
@@ -647,6 +646,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00tjw"]
+size = Vector2(49, 53)
+
 [node name="Player" type="CharacterBody2D" unique_id=125716725 groups=["player"]]
 script = ExtResource("1_4ntmi")
 starting_mask = ExtResource("2_gwnis")
@@ -688,11 +690,6 @@ offset_bottom = 51.0
 value = 100.0
 tint_progress = Color(0, 1, 0.5137255, 1)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1088140997]
-zoom = Vector2(1.2, 1.2)
-position_smoothing_enabled = true
-script = ExtResource("6_od3ui")
-
 [node name="Health" type="Node" parent="." unique_id=1698075313]
 script = ExtResource("5_k53q1")
 max_health = 100.0
@@ -715,3 +712,9 @@ energy = 0.5
 shadow_enabled = true
 texture = ExtResource("9_00tjw")
 texture_scale = 2.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=20472482 groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=76249194]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_00tjw")

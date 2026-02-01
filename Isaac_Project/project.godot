@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 BgmPlayer="*uid://c0sg7afp8i8u0"
 SfxPlayer="*uid://cqfmmr160hvhh"
+GameManager="*uid://c60ywkywp3jxc"
 
 [editor_plugins]
 

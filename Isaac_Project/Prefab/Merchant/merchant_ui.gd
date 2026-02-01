@@ -1,13 +1,15 @@
 extends Control
 
-@onready var mask_list = $Panel/MaskList
-@onready var potion_list = $Panel/PotionList
-@onready var close_button = $Panel/CloseButton
+@onready var mask_list = $MarginContainer/HBoxContainer/Panel/MaskList
+@onready var potion_list = $MarginContainer/HBoxContainer/Panel/PotionList
+@onready var close_button = $MarginContainer/HBoxContainer/Panel/CloseButton
+@onready var bribe_button = $MarginContainer/HBoxContainer/BriberyPanel/MarginContainer/VBoxContainer/BribeButton
 
 var merchant
 var player
 
 func _ready():
+	bribe_button.pressed.connect(_on_bribe_pressed)
 	close_button.pressed.connect(close)
 	visible = false
 
@@ -85,3 +87,30 @@ func buy_potion(potion: PotionData, price: int):
 
 func close():
 	visible = false
+
+func _on_bribe_pressed():
+	var bribe_line_edit = $MarginContainer/HBoxContainer/BriberyPanel/MarginContainer/VBoxContainer/LineEdit
+	var rumor_text = $MarginContainer/HBoxContainer/BriberyPanel/MarginContainer/VBoxContainer/RumorText
+
+	if bribe_line_edit.text.strip_edges() == "":
+		rumor_text.text = "The merchant stares at you, waiting."
+		return
+
+	var amount := int(bribe_line_edit.text)
+
+	if amount <= 0:
+		rumor_text.text = "You think this counts as a bribe?"
+		return
+
+	if not player.spend_money(amount):
+		rumor_text.text = "Come back when you can afford secrets."
+		return
+
+	var result= merchant.offer_bribe(amount)
+
+	if result.is_empty():
+		rumor_text.text = "The merchant shrugs."
+		return
+
+	rumor_text.text = result["text"]
+	bribe_line_edit.text = ""

@@ -6,6 +6,7 @@
 script = ExtResource("1_s57ac")
 mask_name = "Wolf"
 attack_damage = 20
+attack_cooldown = 0.3
 speed_multiplier = 1.2
 strong_against = "Snake"
 metadata/_custom_type_script = "uid://coskmirg14acb"

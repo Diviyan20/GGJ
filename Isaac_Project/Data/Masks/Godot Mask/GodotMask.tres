@@ -6,7 +6,6 @@
 script = ExtResource("1_m5bkw")
 mask_name = "Godot"
 attack_damage = 25
-attack_cooldown = 1.0
 speed_multiplier = 0.8
 has_shield = true
 strong_against = "Na"

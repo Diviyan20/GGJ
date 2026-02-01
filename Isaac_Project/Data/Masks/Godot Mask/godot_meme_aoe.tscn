@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dwq2m46rdt2ol"]
+
+[ext_resource type="Script" uid="uid://csaj61hdr63vk" path="res://godot_meme_aoe.gd" id="1_xlbsu"]
+[ext_resource type="Texture2D" uid="uid://d6rd3wqokjka" path="res://Sprite/Memes/hq720.jpg" id="2_0x6ey"]
+[ext_resource type="Texture2D" uid="uid://cl2h5177dcmil" path="res://Sprite/Memes/images.jpg" id="3_lqkfn"]
+[ext_resource type="Texture2D" uid="uid://dj3hna125e0ja" path="res://Sprite/Memes/error 1.png" id="4_6hyrk"]
+[ext_resource type="Texture2D" uid="uid://dgpmnqmblex2g" path="res://Sprite/Memes/error 2.jpg" id="5_uoat4"]
+[ext_resource type="Texture2D" uid="uid://capqo4mnkwfyy" path="res://Sprite/Memes/fix bug.jpg" id="6_7jx6q"]
+[ext_resource type="Texture2D" uid="uid://7utc0rfylq0k" path="res://Sprite/Memes/programmer.jpg" id="7_7h5ux"]
+[ext_resource type="Texture2D" uid="uid://bpqw2tjt321oh" path="res://Sprite/Memes/Programmer-baby.jpg" id="8_m5qd1"]
+[ext_resource type="Texture2D" uid="uid://comofwcopdj5p" path="res://Sprite/Memes/works-doesnt-work.jpg" id="9_3m7i6"]
+
+[node name="GodotMemeAOE" type="Node2D" unique_id=566354008]
+script = ExtResource("1_xlbsu")
+meme_textures = Array[Texture2D]([ExtResource("2_0x6ey"), ExtResource("3_lqkfn"), ExtResource("4_6hyrk"), ExtResource("5_uoat4"), ExtResource("6_7jx6q"), ExtResource("7_7h5ux"), ExtResource("8_m5qd1"), ExtResource("9_3m7i6")])

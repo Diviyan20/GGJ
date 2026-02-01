@@ -6,5 +6,6 @@
 script = ExtResource("1_lrrls")
 mask_name = "Native"
 attack_damage = 15
+attack_cooldown = 0.2
 strong_against = "Wolf"
 metadata/_custom_type_script = "uid://coskmirg14acb"

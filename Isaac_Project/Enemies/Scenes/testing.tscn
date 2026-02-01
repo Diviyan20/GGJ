@@ -1,12 +1,22 @@
 [gd_scene format=3 uid="uid://xggynabd8oi1"]
 
 [ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_84rq8"]
-[ext_resource type="PackedScene" uid="uid://c8v1d341odx3" path="res://Enemies/Scenes/Characters/Snake.tscn" id="3_4vbnf"]
+[ext_resource type="PackedScene" uid="uid://cc0dj53fujjjj" path="res://Enemies/Scenes/Spawner.tscn" id="4_oj7of"]
 
 [node name="Testing" type="Node2D" unique_id=1434516048]
 
 [node name="Player" parent="." unique_id=125716725 instance=ExtResource("1_84rq8")]
 position = Vector2(296, 269)
 
-[node name="EnemyBase" parent="." unique_id=927637627 instance=ExtResource("3_4vbnf")]
-position = Vector2(606, 395)
+[node name="Spawner" parent="." unique_id=1118806006 node_paths=PackedStringArray("spawn_pos") instance=ExtResource("4_oj7of")]
+position = Vector2(462, 54)
+enemy_type = 1
+spawn_pos = [NodePath("Node2D"), NodePath("Node2D2")]
+spawn_pattern = "random"
+min_spacing = 100.0
+
+[node name="Node2D" type="Node2D" parent="Spawner" unique_id=84796161]
+position = Vector2(-151, 0)
+
+[node name="Node2D2" type="Node2D" parent="Spawner" unique_id=1298470286]
+position = Vector2(72, 333)

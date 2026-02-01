@@ -1,76 +1,61 @@
 [gd_scene format=3 uid="uid://c8v1d341odx3"]
 
 [ext_resource type="PackedScene" uid="uid://ble0r8lt0mqom" path="res://Enemies/Scenes/EnemyBase.tscn" id="1_ulclw"]
-[ext_resource type="Texture2D" uid="uid://btw2x413bb7ei" path="res://Enemies/Assets/Placeholders/Snake/Snake_attack.png" id="2_dkr14"]
 [ext_resource type="Script" uid="uid://ddds2gum2syql" path="res://Enemies/Scripts/enemies/snake.gd" id="2_l4o8u"]
-[ext_resource type="Texture2D" uid="uid://3vwffuv0yd6q" path="res://Enemies/Assets/Placeholders/Snake/Snake_idle.png" id="3_l4o8u"]
 [ext_resource type="Script" uid="uid://cy1uqhys5wfqy" path="res://Enemies/Scripts/data/enemy_data.gd" id="3_xk1hn"]
-[ext_resource type="Texture2D" uid="uid://ehqn61x1x0ti" path="res://Enemies/Assets/Placeholders/Snake/Snake_walk.png" id="4_xk1hn"]
+[ext_resource type="Texture2D" uid="uid://bc37k4te2k0hm" path="res://Enemies/Assets/attacks.png" id="4_dkr14"]
 
 [sub_resource type="Resource" id="Resource_7u0hu"]
 script = ExtResource("3_xk1hn")
 speed = 60.0
+coins_amount = 30
 metadata/_custom_type_script = "uid://cy1uqhys5wfqy"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4o8u"]
+atlas = ExtResource("4_dkr14")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkr14"]
+atlas = ExtResource("4_dkr14")
+region = Rect2(288, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xk1hn"]
+atlas = ExtResource("4_dkr14")
+region = Rect2(288, 64, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7u0hu"]
-atlas = ExtResource("2_dkr14")
-region = Rect2(0, 0, 48, 48)
+atlas = ExtResource("4_dkr14")
+region = Rect2(288, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sy6y0"]
-atlas = ExtResource("2_dkr14")
-region = Rect2(48, 0, 48, 48)
+atlas = ExtResource("4_dkr14")
+region = Rect2(288, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hvwrc"]
-atlas = ExtResource("2_dkr14")
-region = Rect2(96, 0, 48, 48)
+atlas = ExtResource("4_dkr14")
+region = Rect2(288, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gnqsj"]
-atlas = ExtResource("2_dkr14")
-region = Rect2(144, 0, 48, 48)
+atlas = ExtResource("4_dkr14")
+region = Rect2(288, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f848n"]
-atlas = ExtResource("2_dkr14")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b8nfh"]
-atlas = ExtResource("2_dkr14")
-region = Rect2(240, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_40bg5"]
-atlas = ExtResource("3_l4o8u")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bfefi"]
-atlas = ExtResource("3_l4o8u")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sjq1u"]
-atlas = ExtResource("3_l4o8u")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ubn1q"]
-atlas = ExtResource("3_l4o8u")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5qkq0"]
-atlas = ExtResource("4_xk1hn")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h20sj"]
-atlas = ExtResource("4_xk1hn")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3p8of"]
-atlas = ExtResource("4_xk1hn")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1xqh0"]
-atlas = ExtResource("4_xk1hn")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jb7gk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_xk1hn"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4o8u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkr14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xk1hn")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7u0hu")
 }, {
@@ -82,69 +67,35 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gnqsj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f848n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b8nfh")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 7.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_40bg5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bfefi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sjq1u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ubn1q")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5qkq0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h20sj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3p8of")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1xqh0")
 }],
 "loop": true,
 "name": &"slither",
-"speed": 8.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dkr14"]
-radius = 6.0
-height = 38.0
+radius = 7.0
+height = 40.0
 
-[node name="EnemyBase" unique_id=1433610574 instance=ExtResource("1_ulclw")]
+[node name="Snake" unique_id=1433610574 instance=ExtResource("1_ulclw")]
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("2_l4o8u")
 damage = 2
 data = SubResource("Resource_7u0hu")
-attack_range = 40.0
+attack_range = 200.0
+separation_radius = 100.0
 
-[node name="AnimatedSprite2D" parent="." index="0" unique_id=1669407395]
-sprite_frames = SubResource("SpriteFrames_jb7gk")
-animation = &"attack"
-frame = 5
-frame_progress = 1.0
+[node name="SuperSprite2D" parent="." index="0" unique_id=1769319344]
+sprite_frames = SubResource("SpriteFrames_xk1hn")
+animation = &"slither"
+frame_progress = 0.8489611
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2" unique_id=1603726213]
-position = Vector2(5, 20)
+position = Vector2(1, 9)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_dkr14")
+
+[node name="Health" parent="." index="3" unique_id=79193330]
+max_health = 50.0

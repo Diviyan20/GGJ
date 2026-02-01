@@ -184,7 +184,7 @@ func attack_wolf():
 	wolf_attack_fx.global_position = $AttackArea.global_position;
 	wolf_attack_fx.rotation = $AttackArea.rotation;
 	wolf_attack_fx.play("wolf_swing")
-	$Camera2D.offset = Vector2(randf_range(-2,2), randf_range(-2,2))
+
 
 	# 3️⃣ Deal damage to enemies in range
 	for body in $AttackArea.get_overlapping_bodies():

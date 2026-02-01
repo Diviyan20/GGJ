@@ -33,6 +33,8 @@ func room_cleared():
 	is_cleared = true;
 	for door in doors:
 		door.visible = false;
+	for collider in colliders:
+		collider.set_deferred("disabled", true);
 	BgmPlayer._on_scene_changed(false)
 
 func move_camera() -> void:
@@ -40,3 +42,7 @@ func move_camera() -> void:
 	tween.tween_property(camera, "global_position", global_position, camera_move_speed)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
+
+
+func _on_spawner_5_room_cleared() -> void:
+	pass # Replace with function body.

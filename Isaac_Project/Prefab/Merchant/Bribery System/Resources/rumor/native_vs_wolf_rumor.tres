@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="MaskEffectRule" format=3 uid="uid://chovdworubbq2"]
+
+[ext_resource type="Script" uid="uid://ccvfrshhymeqj" path="res://Prefab/Merchant/Bribery System/Resources/RumorVariant.gd" id="1_il856"]
+[ext_resource type="Script" uid="uid://bqu8u4e24fq13" path="res://Prefab/Merchant/Bribery System/Resources/MaskEffectRule.gd" id="2_4gbp4"]
+
+[sub_resource type="Resource" id="Resource_il856"]
+script = ExtResource("1_il856")
+text = "Wolves don’t care what you wear. Steel matters more."
+confidence = 0.7
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_4gbp4"]
+script = ExtResource("1_il856")
+text = "Masks are superstition. Fight better."
+confidence = 0.6
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_1tmyf"]
+script = ExtResource("1_il856")
+text = "The forest folk know how wolves think. Their masks scare them."
+confidence = 0.9
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_0m21q"]
+script = ExtResource("1_il856")
+text = "Wolves hesitate when they see a native face. Gives you an edge."
+confidence = 0.8
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_0sixe"]
+script = ExtResource("1_il856")
+text = "Some masks unsettle animals. Or maybe that’s just fear talking."
+confidence = 0.4
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[resource]
+script = ExtResource("2_4gbp4")
+true_variants = Array[ExtResource("1_il856")]([SubResource("Resource_1tmyf"), SubResource("Resource_0m21q")])
+false_variants = Array[ExtResource("1_il856")]([SubResource("Resource_il856"), SubResource("Resource_4gbp4")])
+vague_variants = Array[ExtResource("1_il856")]([SubResource("Resource_0sixe")])
+metadata/_custom_type_script = "uid://bqu8u4e24fq13"

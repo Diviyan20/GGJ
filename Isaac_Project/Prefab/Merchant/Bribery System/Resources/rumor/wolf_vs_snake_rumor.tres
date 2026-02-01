@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MaskEffectRule" format=3 uid="uid://cp1tycfnre2qt"]
+
+[ext_resource type="Script" uid="uid://ccvfrshhymeqj" path="res://Prefab/Merchant/Bribery System/Resources/RumorVariant.gd" id="1_8t3ys"]
+[ext_resource type="Script" uid="uid://bqu8u4e24fq13" path="res://Prefab/Merchant/Bribery System/Resources/MaskEffectRule.gd" id="2_uavpl"]
+
+[sub_resource type="Resource" id="Resource_uavpl"]
+script = ExtResource("1_8t3ys")
+text = "Cold blood beats fur every time."
+confidence = 0.6
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_8t3ys"]
+script = ExtResource("1_8t3ys")
+text = "Snakes panic at the scent of wolves. They strike poorly."
+confidence = 0.95
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_tlqr0"]
+script = ExtResource("1_8t3ys")
+text = "Snakes react strangely to predators. Could help. Could not."
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[resource]
+script = ExtResource("2_uavpl")
+risk_level = 0.6
+min_bribe = 80
+true_variants = Array[ExtResource("1_8t3ys")]([SubResource("Resource_8t3ys")])
+false_variants = Array[ExtResource("1_8t3ys")]([SubResource("Resource_uavpl")])
+vague_variants = Array[ExtResource("1_8t3ys")]([SubResource("Resource_tlqr0")])
+metadata/_custom_type_script = "uid://bqu8u4e24fq13"

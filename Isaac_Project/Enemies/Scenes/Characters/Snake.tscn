@@ -85,6 +85,7 @@ script = ExtResource("2_l4o8u")
 damage = 2
 data = SubResource("Resource_7u0hu")
 attack_range = 200.0
+separation_radius = 100.0
 
 [node name="SuperSprite2D" parent="." index="0" unique_id=1769319344]
 sprite_frames = SubResource("SpriteFrames_xk1hn")

@@ -1,18 +1,27 @@
-extends Node2D
+extends Area2D
+class_name EnemySpawner
 
-# GDScript
 enum ENEMY_TYPES {NATIVE, WOLF, SNAKE}
+
 @export var enemy_type: ENEMY_TYPES = ENEMY_TYPES.NATIVE
-@export var wave_count: int = 3;
-@export var enemy_min_count: int = 3;
-@export var enemy_max_count: int = 5;
-@export var spawn_pos: Array[Node2D];
-@export var offset_range_min: float = 5.0;
-@export var offset_range_max: float = 20.0;
-@export var spawn_interval: float = 0.3;
-var current_wave_count: int = 0;
-var is_wave_complete: bool = true;
-var current_enemy_count: int = 0;
+@export var wave_count: int = 3
+@export var enemy_min_count: int = 3
+@export var enemy_max_count: int = 5
+@export var spawn_pos: Array[Node2D]
+@export var offset_range_min: float = 5.0
+@export var offset_range_max: float = 20.0
+@export var spawn_interval: float = 0.3
+
+# Native variants - export these for easy setup
+@export_group("Native Variants")
+@export var native_textures: Array[SpriteFrames] = []  # Add 3 textures in inspector
+
+var current_wave_count: int = 0
+var is_wave_complete: bool = true
+var current_enemy_count: int = 0
+var spawning_started: bool = false
+var player_in_range: bool = false
+
 var enemy_map := {
 	ENEMY_TYPES.NATIVE: preload("res://Enemies/Scenes/Characters/Native.tscn"),
 	ENEMY_TYPES.WOLF: preload("res://Enemies/Scenes/Characters/Wolf.tscn"),
@@ -20,29 +29,91 @@ var enemy_map := {
 }
 
 func _ready():
-	is_wave_complete = true
-	spawn_enemy();
+	# Connect Area2D signals
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 	
+	# Setup collision to detect player
+	collision_layer = 0  # Spawner doesn't need to be on a layer
+	collision_mask = 1   # Detect layer 1 (Player)
+	
+	is_wave_complete = true
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") or body.name == "Player":
+		player_in_range = true
+		if not spawning_started:
+			spawning_started = true
+			call_deferred("spawn_enemy")
+
+func _on_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player") or body.name == "Player":
+		player_in_range = false
+
 func spawn_enemy(): 
 	while current_wave_count < wave_count:
 		if is_wave_complete: 
-			is_wave_complete = false;
-			var spawn_amount = randi_range(enemy_min_count, enemy_max_count);
-			current_enemy_count = spawn_amount;
-			var count = 0;
-			print("Spawned: " + str(spawn_amount))
-			while count <= spawn_amount:
-				print("Current spawn point: " + str(count % len(spawn_pos)))
-				var new_enemy = enemy_map[enemy_type].instantiate();
-				new_enemy.global_position = spawn_pos[count % len(spawn_pos)].global_position + Vector2(randf_range(offset_range_min, offset_range_max), randf_range(offset_range_min, offset_range_max));
+			is_wave_complete = false
+			var spawn_amount = randi_range(enemy_min_count, enemy_max_count)
+			current_enemy_count = spawn_amount
+			
+			print("Wave ", current_wave_count + 1, " - Spawning: ", spawn_amount, " enemies")
+			
+			for i in range(spawn_amount):
+				var spawn_point = spawn_pos[i % len(spawn_pos)]
+				var offset = Vector2(
+					randf_range(offset_range_min, offset_range_max),
+					randf_range(offset_range_min, offset_range_max)
+				)
+				
+				var new_enemy = enemy_map[enemy_type].instantiate()
+				new_enemy.global_position = spawn_point.global_position + offset
+				
+				# Apply random texture for Native enemies
+				if enemy_type == ENEMY_TYPES.NATIVE and native_textures.size() > 0:
+					apply_native_variant(new_enemy)
+				
+				# Connect death signal to track enemy count
+				if new_enemy.has_signal("died"):
+					new_enemy.died.connect(count_dead)
+				elif new_enemy.has_node("Health"):
+					new_enemy.get_node("Health").died.connect(count_dead)
+				
 				add_child(new_enemy)
-				await get_tree().create_timer(spawn_interval).timeout 
-				count += 1
-		current_wave_count += 1;
+				await get_tree().create_timer(spawn_interval).timeout
+		
+		current_wave_count += 1
+		
+		# Wait for wave to complete before next wave
+		await wave_completed()
 	
-	# Send signal to logs to unblock the road
+	print("All waves complete!")
+	# Optional: send signal or disable spawner
 
-func count_dead():
-	current_enemy_count -= 1;
+func apply_native_variant(enemy: Node2D) -> void:
+	if native_textures.size() == 0:
+		push_warning("Warning: No native textures configured!")
+		return
+	
+		# Get random SpriteFrames
+	var random_frames = native_textures[randi() % native_textures.size()]
+	
+		# Use SuperSprite2D since that's the actual node name
+	if enemy.has_node("SuperSprite2D"):
+		var anim_sprite: AnimatedSprite2D = enemy.get_node("SuperSprite2D")
+		anim_sprite.sprite_frames = random_frames
+		anim_sprite.play("idle")
+		print("Applied ", random_frames.resource_path, " to Native enemy")
+	else:
+		print("Error: Native enemy has no SuperSprite2D node")
+
+func count_dead() -> void:
+	current_enemy_count -= 1
+	print("Enemy died. Remaining: ", current_enemy_count)
+	
 	if current_enemy_count <= 0:
-		is_wave_complete = true;
+		is_wave_complete = true
+
+func wave_completed() -> void:
+	while not is_wave_complete:
+		await get_tree().create_timer(0.5).timeout

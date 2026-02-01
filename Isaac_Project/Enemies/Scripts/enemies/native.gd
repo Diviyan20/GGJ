@@ -56,8 +56,6 @@ func fire_spear() -> void:
 	#TODO: play throw sound and animation
 
 func _on_attack_timer_timeout() -> void:
-	fire_spear()
-		
 	# Start cooldown
 	attack_timer.start()
 	is_attacking = false

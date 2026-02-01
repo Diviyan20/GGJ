@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cq0ucnc5o66hv"]
+
+[ext_resource type="PackedScene" uid="uid://bq2hv47pjku75" path="res://Player/player.tscn" id="1_sko6l"]
+[ext_resource type="PackedScene" uid="uid://d1ioqt70005jd" path="res://Prefab/Coin/coin.tscn" id="2_gpwwo"]
+[ext_resource type="PackedScene" uid="uid://7hvw7bwrh5pu" path="res://Prefab/Merchant/merchant.tscn" id="3_lubvg"]
+[ext_resource type="PackedScene" uid="uid://bpomcsy0jasud" path="res://Prefab/Merchant/merchant_ui.tscn" id="4_irwqc"]
+[ext_resource type="PackedScene" uid="uid://dumuukb74f7pi" path="res://UI/HUD.tscn" id="5_irwqc"]
+
+[node name="DanyScene" type="Node2D" unique_id=427995696]
+
+[node name="Player" parent="." unique_id=125716725 instance=ExtResource("1_sko6l")]
+
+[node name="Coin" parent="." unique_id=255495991 instance=ExtResource("2_gpwwo")]
+position = Vector2(106.99999, 0.99999994)
+
+[node name="Coin2" parent="." unique_id=1298596146 instance=ExtResource("2_gpwwo")]
+position = Vector2(-125.99998, 0.99999994)
+
+[node name="Coin5" parent="." unique_id=2011615830 instance=ExtResource("2_gpwwo")]
+position = Vector2(-142.665, 1)
+
+[node name="Coin3" parent="." unique_id=1864444527 instance=ExtResource("2_gpwwo")]
+position = Vector2(-61.999996, -92.99999)
+
+[node name="Coin4" parent="." unique_id=868627271 instance=ExtResource("2_gpwwo")]
+position = Vector2(54.999996, 100)
+
+[node name="Merchant" parent="." unique_id=657056221 instance=ExtResource("3_lubvg")]
+position = Vector2(194, 1)
+shop_ui = NodePath("MerchantUI")
+
+[node name="MerchantUI" parent="Merchant" unique_id=2094034110 instance=ExtResource("4_irwqc")]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HUD" parent="." unique_id=1642666173 instance=ExtResource("5_irwqc")]

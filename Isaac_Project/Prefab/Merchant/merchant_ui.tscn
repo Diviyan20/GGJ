@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://bpomcsy0jasud"]
 
 [ext_resource type="Script" uid="uid://e3mpkmfmelmi" path="res://Prefab/Merchant/merchant_ui.gd" id="1_ka8qh"]
+[ext_resource type="Texture2D" uid="uid://bqdr2elmw7lok" path="res://Image/Untitled 02-01-2026 03-52-31.png" id="2_l2hm5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ka8qh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2hm5"]
 
 [node name="MerchantUI" type="Control" unique_id=2094034110]
 z_index = 2
@@ -12,21 +17,42 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ka8qh")
 
-[node name="Panel" type="Panel" parent="." unique_id=830073859]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1829509852]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.397
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.397
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -100.0
-offset_right = 300.0
-offset_bottom = 100.0
+offset_left = -289.34402
+offset_top = -115.5
+offset_right = 289.65598
+offset_bottom = 115.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Mask" type="Label" parent="Panel" unique_id=931439981]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1927535278]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=830073859]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Panel" unique_id=739969067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -121.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l2hm5")
+expand_mode = 2
+
+[node name="Mask" type="Label" parent="MarginContainer/HBoxContainer/Panel" unique_id=931439981]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
@@ -38,7 +64,7 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Mask"
 
-[node name="MaskList" type="HBoxContainer" parent="Panel" unique_id=682553623]
+[node name="MaskList" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Panel" unique_id=682553623]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -53,7 +79,7 @@ offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Potion" type="Label" parent="Panel" unique_id=166921041]
+[node name="Potion" type="Label" parent="MarginContainer/HBoxContainer/Panel" unique_id=166921041]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -69,7 +95,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Potion"
 
-[node name="PotionList" type="HBoxContainer" parent="Panel" unique_id=711028003]
+[node name="PotionList" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Panel" unique_id=711028003]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -84,8 +110,43 @@ offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CloseButton" type="Button" parent="Panel" unique_id=1342842057]
+[node name="CloseButton" type="Button" parent="MarginContainer/HBoxContainer/Panel" unique_id=1342842057]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Close"
+
+[node name="BriberyPanel" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=1476166133]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/BriberyPanel" unique_id=1144086733]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/BriberyPanel/MarginContainer" unique_id=992810954]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer/BriberyPanel/MarginContainer/VBoxContainer" unique_id=961372089]
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Offer Bribe"
+alignment = 1
+
+[node name="BribeButton" type="Button" parent="MarginContainer/HBoxContainer/BriberyPanel/MarginContainer/VBoxContainer" unique_id=1399095763]
+layout_mode = 2
+text = "Send Bribe"
+
+[node name="RumorText" type="Label" parent="MarginContainer/HBoxContainer/BriberyPanel/MarginContainer/VBoxContainer" unique_id=626743529]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ka8qh")
+theme_override_styles/focus = SubResource("StyleBoxFlat_l2hm5")
+horizontal_alignment = 1
+autowrap_mode = 2

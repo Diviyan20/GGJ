@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="MaskEffectRule" format=3 uid="uid://c7hofna0q00x5"]
+
+[ext_resource type="Script" uid="uid://ccvfrshhymeqj" path="res://Prefab/Merchant/Bribery System/Resources/RumorVariant.gd" id="1_pw8e8"]
+[ext_resource type="Script" uid="uid://bqu8u4e24fq13" path="res://Prefab/Merchant/Bribery System/Resources/MaskEffectRule.gd" id="2_cuigh"]
+
+[sub_resource type="Resource" id="Resource_pw8e8"]
+script = ExtResource("1_pw8e8")
+text = "Snakes respect forest spirits. You’ll overpower them."
+confidence = 0.8
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_cuigh"]
+script = ExtResource("1_pw8e8")
+text = "That mask? Snakes don’t fear it. You’ll struggle."
+confidence = 0.9
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[sub_resource type="Resource" id="Resource_pojwe"]
+script = ExtResource("1_pw8e8")
+text = "Masks don’t matter much against reptiles… I think."
+confidence = 0.4
+metadata/_custom_type_script = "uid://ccvfrshhymeqj"
+
+[resource]
+script = ExtResource("2_cuigh")
+risk_level = 0.7
+min_bribe = 100
+true_variants = Array[ExtResource("1_pw8e8")]([SubResource("Resource_cuigh")])
+false_variants = Array[ExtResource("1_pw8e8")]([SubResource("Resource_pw8e8")])
+vague_variants = Array[ExtResource("1_pw8e8")]([SubResource("Resource_pojwe")])
+metadata/_custom_type_script = "uid://bqu8u4e24fq13"

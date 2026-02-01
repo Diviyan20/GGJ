@@ -5,7 +5,8 @@ class_name Player
 @export var spear_scene: PackedScene
 @export var aoe_radius := 96
 @export var move_speed := 100.0
-@export var starting_money := 9999999
+@export var starting_money := 999999999
+
 var money := 0
 var can_attack := true
 var current_mask: MaskData = null
@@ -36,6 +37,9 @@ func _ready():
 	if starting_mask:
 		current_mask = starting_mask
 		current_mask_sprite = _maskdata_to_enum(starting_mask)
+		
+		# Set player's entity type based on mask
+		health.entity_type = starting_mask.mask_name
 
 		# Directly play ON animation (no OFF on start)
 		mask_anim.show()
@@ -61,6 +65,9 @@ func _maskdata_to_enum(mask: MaskData) -> mask_type:
 
 func equip_mask(mask: MaskData):
 	current_mask = mask
+	
+	# Update player's entity type when mask changes
+	health.entity_type = mask.mask_name
 
 	if not owned_masks.has(mask):
 		owned_masks.append(mask)
@@ -172,6 +179,7 @@ func attack_native():
 	spear.direction = aim_dir
 	spear.rotation = aim_dir.angle()
 	spear.damage = current_mask.attack_damage
+ 	#spear.attacker_type = current_mask.mask_name
 
 func attack_wolf():
 	# 1️⃣ Position & rotate attack area
@@ -191,7 +199,7 @@ func attack_wolf():
 			continue
 		if body.has_node("Health"):
 			var enemy_health: Health = body.get_node("Health")
-			enemy_health.take_damage(current_mask.attack_damage)
+			enemy_health.take_damage(current_mask.attack_damage, current_mask.mask_name)
 
 	# 4️⃣ Hide effect after animation
 	await wolf_attack_fx.animation_finished
@@ -218,7 +226,6 @@ func attack_godot():
 # ----------------
 func take_damage(amount: float) -> void:
 	health.take_damage(amount)
-	
 	var camera := $Camera2D
 	camera.shake(1.0)
 

@@ -7,6 +7,8 @@ func _ready() -> void:
 	super._ready() # Initialize all attributes in EnemyBase
 	# Ensure attack timer is setup
 	attack_timer.wait_time = data.attack_speed
+	
+	health.entity_type = "Native"
 
 func _physics_process(delta: float) -> void:
 	update_facing()

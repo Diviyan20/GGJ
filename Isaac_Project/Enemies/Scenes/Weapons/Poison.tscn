@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://mxlqx4niq5rh"]
+
+[ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="1_ogsbp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd5id"]
+atlas = ExtResource("1_ogsbp")
+
+[node name="Poison" type="Area2D" unique_id=25571373]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=906253818]
+texture = SubResource("AtlasTexture_jd5id")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917964872]
+
+[node name="Timer" type="Timer" parent="." unique_id=824759557]

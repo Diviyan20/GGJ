@@ -7,6 +7,8 @@ func _ready() -> void:
 	super._ready() # Initialize all attributes in EnemyBase
 	# Ensure attack timer is setup
 	attack_timer.wait_time = data.attack_speed
+	
+	health.entity_type = "Snake"
 
 func _physics_process(delta: float) -> void:
 	update_facing()
@@ -34,7 +36,7 @@ func _on_attack_timer_timeout() -> void:
 		
 		# Deal damage if player is still in range
 		if global_position.distance_to(player.global_position) <= attack_range:
-			player_health.take_damage(damage)
+			player_health.take_damage(damage, "Snake")
 	
 	# Reset state
 	can_attack = true

@@ -5,6 +5,7 @@ class_name EnemySpear
 @export var lifetime:= 3.0
 
 var direction:= Vector2.ZERO
+var attacker_type: String = ""  # Set by player when spawning
 var damage:= 10
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -37,7 +38,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.name == "Player":
 		if body.has_node("Health"):
 			var player_health: Health = body.get_node("Health")
-			player_health.take_damage(damage)
+			player_health.take_damage(damage, "Native")
 			print("Player Health: " + str(player_health.current_health))
 		queue_free()
 

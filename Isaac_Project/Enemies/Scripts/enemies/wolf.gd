@@ -9,6 +9,7 @@ func _ready() -> void:
 	attack_timer.wait_time = data.attack_speed
 	
 	anim_sprite.animation_finished.connect(_on_animation_finished)
+	health.entity_type = "Wolf"
 
 func _physics_process(delta: float) -> void:
 	update_facing()
@@ -42,7 +43,7 @@ func _on_animation_finished() -> void:
 			var distance = global_position.distance_to(player.global_position)
 			if distance <= attack_range:
 				var player_health: Health = player.get_node("Health")
-				player_health.take_damage(damage)
+				player_health.take_damage(damage, "Wolf")
 				print("Player Health: " + str(player_health.current_health))
 		
 		# Start cooldown

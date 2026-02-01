@@ -646,6 +646,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00tjw"]
+size = Vector2(49, 48)
+
 [node name="Player" type="CharacterBody2D" unique_id=125716725 groups=["player"]]
 script = ExtResource("1_4ntmi")
 starting_mask = ExtResource("2_gwnis")
@@ -713,3 +716,9 @@ energy = 0.5
 shadow_enabled = true
 texture = ExtResource("9_00tjw")
 texture_scale = 2.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=973380425 groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1792269137]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_00tjw")

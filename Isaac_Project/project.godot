@@ -12,8 +12,13 @@ config_version=5
 
 config/name="Isaac Project"
 run/main_scene="uid://cq0ucnc5o66hv"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+BgmPlayer="*uid://c0sg7afp8i8u0"
+SfxPlayer="*uid://cqfmmr160hvhh"
 
 [editor_plugins]
 

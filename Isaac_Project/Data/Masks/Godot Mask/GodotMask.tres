@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="MaskData" format=3 uid="uid://cjjoyodi8qa4k"]
 
 [ext_resource type="Script" uid="uid://coskmirg14acb" path="res://Data/Masks/MaskData.gd" id="1_m5bkw"]
+[ext_resource type="Texture2D" uid="uid://blnfetd6kedc6" path="res://Sprite/mask/tile160.png" id="1_n2vtl"]
 
 [resource]
 script = ExtResource("1_m5bkw")
@@ -9,4 +10,5 @@ attack_damage = 25
 speed_multiplier = 0.8
 has_shield = true
 strong_against = "Na"
+icon = ExtResource("1_n2vtl")
 metadata/_custom_type_script = "uid://coskmirg14acb"

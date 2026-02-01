@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="PotionData" format=3 uid="uid://71lrmiiks217"]
 
 [ext_resource type="Script" uid="uid://hincu7syigwm" path="res://Prefab/Potion/potion_data.gd" id="1_lbqrn"]
+[ext_resource type="Texture2D" uid="uid://bqu62h0f06541" path="res://Sprite/Potion/tile015.png" id="1_wvpgf"]
 
 [resource]
 script = ExtResource("1_lbqrn")
 potion_name = "Heal Potion"
 value = 30.0
+icon = ExtResource("1_wvpgf")
 metadata/_custom_type_script = "uid://hincu7syigwm"

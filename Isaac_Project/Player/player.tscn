@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="5_fhl08"]
 [ext_resource type="Script" uid="uid://cpu1ntlwe7mgv" path="res://Damage System/health.gd" id="5_k53q1"]
 [ext_resource type="Texture2D" uid="uid://cuy4sbqykoe8a" path="res://Sprite/Sprite sheet 1.png" id="5_vtle1"]
-[ext_resource type="Script" uid="uid://110xr8a1quo0" path="res://Player/camera_2d.gd" id="6_od3ui"]
+[ext_resource type="Script" path="res://Player/camera_2d.gd" id="6_od3ui"]
 [ext_resource type="Texture2D" uid="uid://cvh7ujv2js8pk" path="res://Sprite/Light/light 2.jpg" id="9_00tjw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f4lon"]

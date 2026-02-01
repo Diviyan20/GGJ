@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://6g65g2lst7h6"]
+[gd_scene format=3 uid="uid://6g65g2lst7h6"]
 
 [ext_resource type="Script" uid="uid://djq6siu3wkk28" path="res://UI/pause_menu.gd" id="1_jfm1e"]
 [ext_resource type="Shader" uid="uid://dtcn4dkn1iu7b" path="res://UI/pause_menu.gdshader" id="1_ltd3m"]
@@ -130,7 +130,7 @@ _data = {
 &"blurring": SubResource("Animation_03fe5")
 }
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" unique_id=1664822437]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -140,7 +140,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jfm1e")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=687892525]
 material = SubResource("ShaderMaterial_jfm1e")
 layout_mode = 1
 anchors_preset = 15
@@ -149,7 +149,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=621970479]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -164,27 +164,25 @@ offset_bottom = 77.25
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1516340832]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1915806652]
 layout_mode = 2
 text = "Resume"
 
-[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1842954798]
 layout_mode = 2
 text = "Restart Level"
 
-[node name="BackToMainMenu" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="BackToMainMenu" type="Button" parent="PanelContainer/VBoxContainer" unique_id=691321353]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Back To Main Menu"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_pqlge")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=641818874]
+libraries/ = SubResource("AnimationLibrary_pqlge")
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

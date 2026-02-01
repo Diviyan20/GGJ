@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://caucysifqvagr"
+path="res://.godot/imported/The Winds of Wild.mp3-3fcf6290d9848f410163f0d097ce3f91.mp3str"
+
+[deps]
+
+source_file="res://Data/Songs/The Winds of Wild.mp3"
+dest_files=["res://.godot/imported/The Winds of Wild.mp3-3fcf6290d9848f410163f0d097ce3f91.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

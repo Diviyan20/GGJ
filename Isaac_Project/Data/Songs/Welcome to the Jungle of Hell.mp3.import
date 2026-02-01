@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dvxd5plut6sql"
+path="res://.godot/imported/Welcome to the Jungle of Hell.mp3-95bcc62b50ebeb22bf62f7f4c2baf521.mp3str"
+
+[deps]
+
+source_file="res://Data/Songs/Welcome to the Jungle of Hell.mp3"
+dest_files=["res://.godot/imported/Welcome to the Jungle of Hell.mp3-95bcc62b50ebeb22bf62f7f4c2baf521.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

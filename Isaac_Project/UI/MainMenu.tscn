@@ -1,6 +1,187 @@
 [gd_scene format=3 uid="uid://baaxsj75dblww"]
 
-[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_uahxu"]
+[ext_resource type="Script" uid="uid://cqwgascbqscr2" path="res://UI/main_menu.gd" id="1_uahxu"]
+[ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="2_b37jj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8aown"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(224, 320, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6syg"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(224, 448, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6s48"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(224, 480, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otjfi"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(224, 352, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obtq6"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(224, 384, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4ff4"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(224, 416, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5vcv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8aown")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6syg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6s48")
+}],
+"loop": true,
+"name": &"hover",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otjfi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obtq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4ff4")
+}],
+"loop": false,
+"name": &"touch",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b37jj"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(320, 320, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5vcv"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(320, 448, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2d4f"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(320, 480, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vw7e"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(320, 352, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrfef"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(320, 384, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csrb3"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(320, 416, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wxllh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b37jj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5vcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2d4f")
+}],
+"loop": true,
+"name": &"hover",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vw7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrfef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csrb3")
+}],
+"loop": false,
+"name": &"touch",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avhca"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(416, 320, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8sin"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(416, 448, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxi16"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(416, 480, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsl72"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(416, 352, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yndlu"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(416, 384, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v87kc"]
+atlas = ExtResource("2_b37jj")
+region = Rect2(416, 416, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h2xek"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avhca")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8sin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxi16")
+}],
+"loop": true,
+"name": &"hover",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsl72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yndlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v87kc")
+}],
+"loop": false,
+"name": &"touch",
+"speed": 10.0
+}]
 
 [node name="MainMenu" type="Node2D" unique_id=258926757]
 script = ExtResource("1_uahxu")
@@ -20,6 +201,11 @@ offset_bottom = 275.0
 text = "Start Game"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ButtonManager/Start" unique_id=1495551767]
+position = Vector2(100, 37.5)
+scale = Vector2(2.2, 2.2)
+sprite_frames = SubResource("SpriteFrames_w5vcv")
+animation = &"hover"
+frame_progress = 0.4035783
 
 [node name="Setting" type="Button" parent="ButtonManager" unique_id=668583448]
 layout_mode = 0
@@ -30,6 +216,10 @@ offset_bottom = 375.0
 text = "Setting"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ButtonManager/Setting" unique_id=145141284]
+position = Vector2(100, 37.5)
+scale = Vector2(2.2, 2.2)
+sprite_frames = SubResource("SpriteFrames_wxllh")
+animation = &"hover"
 
 [node name="Quit" type="Button" parent="ButtonManager" unique_id=7043206]
 layout_mode = 0
@@ -40,7 +230,18 @@ offset_bottom = 475.0
 text = "Quit Game"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ButtonManager/Quit" unique_id=2125424873]
+position = Vector2(100, 37.5)
+scale = Vector2(2.2, 2.2)
+sprite_frames = SubResource("SpriteFrames_h2xek")
+animation = &"hover"
+frame_progress = 0.85098773
 
+[connection signal="mouse_entered" from="ButtonManager/Start" to="." method="_on_start_mouse_entered"]
+[connection signal="mouse_exited" from="ButtonManager/Start" to="." method="_on_start_mouse_exited"]
 [connection signal="pressed" from="ButtonManager/Start" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="ButtonManager/Setting" to="." method="_on_setting_mouse_entered"]
+[connection signal="mouse_exited" from="ButtonManager/Setting" to="." method="_on_setting_mouse_exited"]
 [connection signal="pressed" from="ButtonManager/Setting" to="." method="_on_setting_pressed"]
+[connection signal="mouse_entered" from="ButtonManager/Quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="mouse_exited" from="ButtonManager/Quit" to="." method="_on_quit_mouse_exited"]
 [connection signal="pressed" from="ButtonManager/Quit" to="." method="_on_quit_pressed"]

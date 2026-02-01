@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://07gpidl6jlak"]
+
+[ext_resource type="PackedScene" uid="uid://bxwft3uvwkqx5" path="res://Scene/SoundSlider.tscn" id="1_nliig"]
+
+[node name="Setting" type="Node2D"]
+
+[node name="Sound" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MasterVolume" parent="Sound" instance=ExtResource("1_nliig")]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 200.0
+offset_right = 900.0
+offset_bottom = 216.0
+busName = "Master"
+
+[node name="BGMVolume" parent="Sound" instance=ExtResource("1_nliig")]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 300.0
+offset_right = 900.0
+offset_bottom = 316.0
+busName = "BGM"
+
+[node name="SFXVolume" parent="Sound" instance=ExtResource("1_nliig")]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 400.0
+offset_right = 900.0
+offset_bottom = 416.0
+busName = "SFX"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 250.0
+offset_top = 200.0
+offset_right = 368.0
+offset_bottom = 223.0
+text = "Master Volume"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 250.0
+offset_top = 300.0
+offset_right = 350.0
+offset_bottom = 323.0
+text = "BGM Volume"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 250.0
+offset_top = 400.0
+offset_right = 341.0
+offset_bottom = 423.0
+text = "SFX Volume"

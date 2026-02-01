@@ -5,7 +5,7 @@ class_name Player
 @export var spear_scene: PackedScene
 @export var aoe_radius := 96
 @export var move_speed := 100.0
-@export var starting_money := 0
+@export var starting_money := 9999999
 var money := 0
 var can_attack := true
 var current_mask: MaskData = null

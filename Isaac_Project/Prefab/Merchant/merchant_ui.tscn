@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bpomcsy0jasud"]
 
 [ext_resource type="Script" uid="uid://e3mpkmfmelmi" path="res://Prefab/Merchant/merchant_ui.gd" id="1_ka8qh"]
+[ext_resource type="Texture2D" uid="uid://bqdr2elmw7lok" path="res://Image/Untitled 02-01-2026 03-52-31.png" id="2_l2hm5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ka8qh"]
 
@@ -39,6 +40,17 @@ custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Panel" unique_id=739969067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -121.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l2hm5")
+expand_mode = 2
 
 [node name="Mask" type="Label" parent="MarginContainer/HBoxContainer/Panel" unique_id=931439981]
 texture_filter = 1

@@ -3,6 +3,7 @@ class_name Player
 
 @export var starting_mask: MaskData
 @export var spear_scene: PackedScene
+@export var godot_aoe_scene: PackedScene
 @export var aoe_radius := 96
 @export var move_speed := 100.0
 @export var starting_money := 0
@@ -198,20 +199,11 @@ func attack_wolf():
 	wolf_attack_fx.visible = false
 
 func attack_godot():
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsShapeQueryParameters2D.new()
-	var shape = CircleShape2D.new()
-	shape.radius = aoe_radius
-	query.shape = shape
-	query.transform = Transform2D(0, global_position)
+	var aoe = godot_aoe_scene.instantiate()
+	get_parent().add_child(aoe)
 
-	var results = space_state.intersect_shape(query)
-
-	for result in results:
-		var body = result.collider
-		if body.has_node("Health"):
-			var enemy_health: Health = body.get_node("Health")
-			enemy_health.take_damage(current_mask.attack_damage)
+	aoe.global_position = global_position
+	aoe.damage = current_mask.attack_damage
 
 # ----------------
 # DAMAGE SYSTEM

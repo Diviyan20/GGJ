@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bk8dlkr3gd5b8"]
+
+[ext_resource type="Texture2D" uid="uid://bpqw2tjt321oh" path="res://Sprite/Memes/Programmer-baby.jpg" id="1_j3cxd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k667"]
+atlas = ExtResource("1_j3cxd")
+region = Rect2(0, 0, 500, 732)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k667")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

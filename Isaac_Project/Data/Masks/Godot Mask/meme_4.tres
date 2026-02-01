@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b8jc38cdh3dc"]
+
+[ext_resource type="Texture2D" uid="uid://7utc0rfylq0k" path="res://Sprite/Memes/programmer.jpg" id="1_6evr4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffk4c"]
+atlas = ExtResource("1_6evr4")
+region = Rect2(0, 0, 1588, 1403)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffk4c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

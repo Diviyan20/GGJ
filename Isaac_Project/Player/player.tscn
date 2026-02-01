@@ -713,5 +713,3 @@ energy = 0.5
 shadow_enabled = true
 texture = ExtResource("9_00tjw")
 texture_scale = 2.0
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1556077070]

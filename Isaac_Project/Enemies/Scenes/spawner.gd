@@ -6,6 +6,7 @@ signal room_cleared
 
 enum ENEMY_TYPES {NATIVE, WOLF, SNAKE}
 
+@onready var hud = get_parent().get_node("HUD")
 @export var enemy_type: ENEMY_TYPES = ENEMY_TYPES.NATIVE
 @export var wave_count: int = 3
 @export var enemy_min_count: int = 3
@@ -37,6 +38,9 @@ func _ready():
 	# Connect Area2D signals
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	
+	wave_started.connect(_on_wave_started)
+	room_cleared.connect(_on_room_cleared)
 	
 	# Setup collision to detect player
 	collision_layer = 0  # Spawner doesn't need to be on a layer
@@ -142,3 +146,9 @@ func count_dead() -> void:
 func wave_completed() -> void:
 	while not is_wave_complete:
 		await get_tree().create_timer(0.5).timeout
+
+func _on_wave_started(current: int, total: int):
+	hud.set_wave(current, total)
+
+func _on_room_cleared():
+	hud.show_room_clear()

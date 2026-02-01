@@ -11,6 +11,8 @@ enum ENEMY_TYPES {NATIVE, WOLF, SNAKE}
 @export var offset_range_min: float = 5.0
 @export var offset_range_max: float = 20.0
 @export var spawn_interval: float = 0.3
+@export var spawn_pattern: String = "circle"  # "random", "circle", "grid"
+@export var min_spacing := 32.0
 
 # Native variants - export these for easy setup
 @export_group("Native Variants")
@@ -61,19 +63,26 @@ func spawn_enemy():
 			
 			for i in range(spawn_amount):
 				var spawn_point = spawn_pos[i % len(spawn_pos)]
-				var offset = Vector2(
-					randf_range(offset_range_min, offset_range_max),
-					randf_range(offset_range_min, offset_range_max)
-				)
+				var spawn_position: Vector2
+				
+				match spawn_pattern:
+					"circle":
+						spawn_position = get_circle_position(spawn_point.global_position, i, spawn_amount)
+					"grid":
+						spawn_position = get_grid_position(spawn_point.global_position, i)
+					"random": 
+						var offset = Vector2(
+							randf_range(offset_range_min, offset_range_max),
+							randf_range(offset_range_min, offset_range_max)
+						)
+						spawn_position = spawn_point.global_position + offset
 				
 				var new_enemy = enemy_map[enemy_type].instantiate()
-				new_enemy.global_position = spawn_point.global_position + offset
+				new_enemy.global_position = spawn_position
 				
-				# Apply random texture for Native enemies
 				if enemy_type == ENEMY_TYPES.NATIVE and native_textures.size() > 0:
 					apply_native_variant(new_enemy)
 				
-				# Connect death signal to track enemy count
 				if new_enemy.has_signal("died"):
 					new_enemy.died.connect(count_dead)
 				elif new_enemy.has_node("Health"):
@@ -83,12 +92,23 @@ func spawn_enemy():
 				await get_tree().create_timer(spawn_interval).timeout
 		
 		current_wave_count += 1
-		
-		# Wait for wave to complete before next wave
 		await wave_completed()
 	
 	print("All waves complete!")
-	# Optional: send signal or disable spawner
+
+func get_circle_position(center: Vector2, index: int, total: int) -> Vector2:
+	var angle = (TAU / total) * index  # Evenly distribute around circle
+	var radius = randf_range(offset_range_min, offset_range_max)
+	return center + Vector2(cos(angle), sin(angle)) * radius
+
+func get_grid_position(center: Vector2, index: int) -> Vector2:
+	var cols = 3  # Enemies per row
+	var row = index / cols
+	var col = index % cols
+	return center + Vector2(col * min_spacing, row * min_spacing) + Vector2(
+		randf_range(-10, 10),  # Small random offset
+		randf_range(-10, 10)
+	)
 
 func apply_native_variant(enemy: Node2D) -> void:
 	if native_textures.size() == 0:

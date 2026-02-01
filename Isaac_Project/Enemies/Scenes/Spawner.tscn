@@ -135,27 +135,27 @@ region = Rect2(384, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ushxh"]
 atlas = ExtResource("2_j2o68")
-region = Rect2(352, 32, 32, 32)
+region = Rect2(384, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhpic"]
 atlas = ExtResource("2_j2o68")
-region = Rect2(352, 64, 32, 32)
+region = Rect2(384, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88shr"]
 atlas = ExtResource("2_j2o68")
-region = Rect2(352, 96, 32, 32)
+region = Rect2(384, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p07t4"]
 atlas = ExtResource("2_j2o68")
-region = Rect2(352, 128, 32, 32)
+region = Rect2(384, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3fdf0"]
 atlas = ExtResource("2_j2o68")
-region = Rect2(352, 160, 32, 32)
+region = Rect2(384, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_abuir"]
 atlas = ExtResource("2_j2o68")
-region = Rect2(352, 192, 32, 32)
+region = Rect2(384, 192, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tqmam"]
 animations = [{

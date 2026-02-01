@@ -15,6 +15,11 @@ var player: CharacterBody2D
 @export var chase_enabled: bool = true
 @export var attack_range: float = 16.0
 
+# ==== SEPARATION SETTINGS ===
+@export var separation_enabled: bool = true
+@export var separation_radius: float = 32.0  # Distance to maintain from other enemies
+@export var separation_strength: float = 0.5  # How strongly to avoid (0-1)
+
 # === NODES ===
 @onready var anim_sprite: AnimatedSprite2D = $SuperSprite2D
 @onready var attack_timer: Timer = $AttackTimer
@@ -22,6 +27,7 @@ var player: CharacterBody2D
 
 
 func _ready() -> void:
+	add_to_group("enemies")
 	# Initialize stats from data resource
 	if data == null:
 		push_warning("Enemy has no EnemyData assigned!")
@@ -58,7 +64,7 @@ func drop_coins() -> void:
 # ------------------------
 # CHASE SYSTEM
 # ------------------------
-func chase_player(delta: float) -> void:
+func chase_player(_delta: float) -> void:
 	if not chase_enabled or player == null:
 		return
 	
@@ -69,8 +75,45 @@ func chase_player(delta: float) -> void:
 	if distance <= attack_range:
 		velocity = Vector2.ZERO
 	else:
-		velocity = to_player.normalized() * data.speed
+		# Calculate chase direction
+		var chase_direction = to_player.normalized()
+		
+		# Apply separation from other enemies
+		var separation = calculate_separation()
+		
+		# Blend chase and separation
+		var final_direction = chase_direction + (separation * separation_strength)
+		final_direction = final_direction.normalized()
+		
+		velocity = final_direction * data.speed
 	move_and_slide()
+
+func calculate_separation() -> Vector2:
+	if not separation_enabled:
+		return Vector2.ZERO
+	
+	var separation_vector := Vector2.ZERO
+	var nearby_count := 0
+	
+	# Check all enemies in the group
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy == self:
+			continue
+		
+		var distance = global_position.distance_to(enemy.global_position)
+		
+		# If enemy is too close, push away
+		if distance < separation_radius and distance > 0:
+			var push_direction = (global_position - enemy.global_position).normalized()
+			var push_force = 1.0 - (distance / separation_radius)  # Stronger when closer
+			separation_vector += push_direction * push_force
+			nearby_count += 1
+	
+	# Average the separation force
+	if nearby_count > 0:
+		separation_vector = separation_vector.normalized()
+	
+	return separation_vector
 
 # ------------------
 # HELPERS (SPRITE FLIPPING)

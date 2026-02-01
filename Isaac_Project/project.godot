@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/SuperSprite2D/plugin.cfg")
 
+[global_group]
+
+enemies=""
+
 [input]
 
 ui_left={

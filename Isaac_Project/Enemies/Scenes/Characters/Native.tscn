@@ -23,6 +23,7 @@ script = ExtResource("2_uki6l")
 spear_scene = ExtResource("3_3em16")
 data = SubResource("Resource_ivhka")
 attack_range = 120.0
+separation_radius = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2" unique_id=908276599]
 position = Vector2(0, 3)

@@ -122,6 +122,7 @@ script = ExtResource("2_fjrfi")
 damage = 2
 data = SubResource("Resource_fjrfi")
 attack_range = 50.0
+separation_radius = 100.0
 
 [node name="SuperSprite2D" parent="." index="0" unique_id=1769319344]
 sprite_frames = SubResource("SpriteFrames_jsvdc")

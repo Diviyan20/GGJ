@@ -10,7 +10,10 @@ position = Vector2(296, 269)
 
 [node name="Spawner" parent="." unique_id=1118806006 node_paths=PackedStringArray("spawn_pos") instance=ExtResource("4_oj7of")]
 position = Vector2(462, 54)
+enemy_type = 1
 spawn_pos = [NodePath("Node2D"), NodePath("Node2D2")]
+spawn_pattern = "random"
+min_spacing = 100.0
 
 [node name="Node2D" type="Node2D" parent="Spawner" unique_id=84796161]
 position = Vector2(-151, 0)

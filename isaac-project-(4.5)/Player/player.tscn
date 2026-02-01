@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bq2hv47pjku75"]
+
+[ext_resource type="Script" uid="uid://dnvxvk3mocoyj" path="res://Player/player.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://bt3d14fa56vkj" path="res://icon.svg" id="2_btcbx"]
+[ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="2_gwnis"]
+[ext_resource type="PackedScene" uid="uid://bmgqtdlahgdgj" path="res://Data/Masks/Native/spear.tscn" id="3_k53q1"]
+[ext_resource type="Script" uid="uid://cpu1ntlwe7mgv" path="res://Damage System/health.gd" id="5_k53q1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
+size = Vector2(121, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btcbx"]
+radius = 326.20392
+
+[node name="Player" type="CharacterBody2D" unique_id=125716725 groups=["player"]]
+script = ExtResource("1_4ntmi")
+starting_mask = ExtResource("2_gwnis")
+spear_scene = ExtResource("3_k53q1")
+move_speed = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=960359477]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_btcbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=800362068]
+position = Vector2(0.5, 0)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("RectangleShape2D_4ntmi")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1887239872]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=2050550397]
+shape = SubResource("CircleShape2D_btcbx")
+
+[node name="HPBarRoot" type="Node2D" parent="." unique_id=1750352440]
+z_index = 10
+position = Vector2(-75, -100)
+
+[node name="HPBar" type="TextureProgressBar" parent="HPBarRoot" unique_id=1212926991]
+z_index = 10
+offset_left = 472.0
+offset_top = 31.0
+offset_right = 622.0
+offset_bottom = 51.0
+value = 100.0
+tint_progress = Color(0, 1, 0.5137255, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1411724628]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1088140997]
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true
+
+[node name="Health" type="Node" parent="." unique_id=1698075313]
+script = ExtResource("5_k53q1")

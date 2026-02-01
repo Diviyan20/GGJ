@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ble0r8lt0mqom"]
+
+[ext_resource type="Script" uid="uid://gs6vw6qp8qrr" path="res://Enemies/Scripts/enemies/enemy_base.gd" id="1_e10o3"]
+[ext_resource type="Script" uid="uid://cy1uqhys5wfqy" path="res://Enemies/Scripts/data/enemy_data.gd" id="2_0xnws"]
+[ext_resource type="Script" uid="uid://cpu1ntlwe7mgv" path="res://Damage System/health.gd" id="3_ywfkg"]
+[ext_resource type="Script" uid="uid://yugiwm4upl2y" path="res://addons/SuperSprite2D/AnimatedSprite_m.gd" id="4_70ke6"]
+
+[sub_resource type="Resource" id="Resource_ywfkg"]
+script = ExtResource("2_0xnws")
+metadata/_custom_type_script = "uid://cy1uqhys5wfqy"
+
+[node name="EnemyBase" type="CharacterBody2D" unique_id=1433610574]
+script = ExtResource("1_e10o3")
+data = SubResource("Resource_ywfkg")
+
+[node name="SuperSprite2D" type="AnimatedSprite2D" parent="." unique_id=1769319344]
+script = ExtResource("4_70ke6")
+metadata/_custom_type_script = "uid://yugiwm4upl2y"
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=2103918251]
+
+[node name="Health" type="Node" parent="." unique_id=79193330]
+script = ExtResource("3_ywfkg")

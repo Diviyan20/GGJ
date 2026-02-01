@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://baaxsj75dblww"]
+[gd_scene format=3 uid="uid://pyjgwspjh60n"]
 
-[ext_resource type="Script" uid="uid://cqwgascbqscr2" path="res://UI/main_menu.gd" id="1_uahxu"]
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_uahxu"]
 [ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="2_b37jj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8aown"]
@@ -235,6 +235,9 @@ scale = Vector2(2.2, 2.2)
 sprite_frames = SubResource("SpriteFrames_h2xek")
 animation = &"hover"
 frame_progress = 0.85098773
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=849860093]
+position = Vector2(574, 323)
 
 [connection signal="mouse_entered" from="ButtonManager/Start" to="." method="_on_start_mouse_entered"]
 [connection signal="mouse_exited" from="ButtonManager/Start" to="." method="_on_start_mouse_exited"]

@@ -967,10 +967,9 @@ position = Vector2(-4.5, -0.5)
 shape = SubResource("RectangleShape2D_qpib6")
 debug_color = Color(0.82763267, 0.59127516, 0.87425596, 0.41960785)
 
-[node name="Node2D6" type="Node2D" parent="Camera Anchors" unique_id=623768580 node_paths=PackedStringArray("room_spawner")]
+[node name="Node2D6" type="Node2D" parent="Camera Anchors" unique_id=623768580]
 position = Vector2(-333, 542)
 script = ExtResource("2_ap7qg")
-room_spawner = NodePath("")
 
 [node name="Area2D" type="Area2D" parent="Camera Anchors/Node2D6" unique_id=2044419774]
 
@@ -1166,7 +1165,7 @@ zoom = Vector2(1.15, 1.15)
 
 [node name="Player" parent="." unique_id=125716725 instance=ExtResource("2_kfy71")]
 z_index = 1
-position = Vector2(-29, -1)
+position = Vector2(-320, 101)
 scale = Vector2(0.5, 0.5)
 starting_money = 300
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxwft3uvwkqx5"]
+[gd_scene format=3 uid="uid://bxwft3uvwkqx5"]
 
 [ext_resource type="Script" uid="uid://b1uswcrc57oef" path="res://Scene/sound_slider.gd" id="1_er0yn"]
 

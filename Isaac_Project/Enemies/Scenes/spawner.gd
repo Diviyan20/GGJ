@@ -17,6 +17,7 @@ enum ENEMY_TYPES {NATIVE, WOLF, SNAKE}
 @export var spawn_interval: float = 0.3
 @export var spawn_pattern: String = "circle"  # "random", "circle", "grid"
 @export var min_spacing := 32.0
+signal clear
 
 # Native variants - export these for easy setup
 @export_group("Native Variants")

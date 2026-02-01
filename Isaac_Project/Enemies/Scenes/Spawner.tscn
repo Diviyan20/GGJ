@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dstf3lrqp3ckq" path="res://Enemies/Scenes/spawner.gd" id="1_8joiq"]
 [ext_resource type="Texture2D" uid="uid://bc37k4te2k0hm" path="res://Enemies/Assets/attacks.png" id="2_j2o68"]
-[ext_resource type="Texture2D" uid="uid://ct755mu5ocasj" path="res://Enemies/Assets/Global Game Jam 2026.png" id="5_gffsq"]
+[ext_resource type="Texture2D" uid="uid://1wiywbu0ggyx" path="res://Sprite/Global Game Jam 2026.png" id="3_j2o68"]
 [ext_resource type="Script" uid="uid://yugiwm4upl2y" path="res://addons/SuperSprite2D/AnimatedSprite_m.gd" id="6_6wdw1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ob01k"]
@@ -195,8 +195,8 @@ animations = [{
 size = Vector2(97, 130)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_udy82"]
-atlas = ExtResource("5_gffsq")
-region = Rect2(128, 256, 128, 128)
+atlas = ExtResource("3_j2o68")
+region = Rect2(384, 352, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0lpje"]
 animations = [{

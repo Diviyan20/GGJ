@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://cf5u0vvos1fal"]
+
+[ext_resource type="SpriteFrames" uid="uid://d1uvd8ukwmane" path="res://Data/Masks/Godot Mask/meme_1.tres" id="1_7rcx6"]
+[ext_resource type="SpriteFrames" uid="uid://b6xmjevii8g1r" path="res://Data/Masks/Godot Mask/meme_2.tres" id="2_ieobm"]
+[ext_resource type="SpriteFrames" uid="uid://cqpc7m2jpruys" path="res://Data/Masks/Godot Mask/meme_3.tres" id="3_4jh2t"]
+[ext_resource type="SpriteFrames" uid="uid://b8jc38cdh3dc" path="res://Data/Masks/Godot Mask/meme_4.tres" id="4_dl01c"]
+[ext_resource type="SpriteFrames" uid="uid://bk8dlkr3gd5b8" path="res://Data/Masks/Godot Mask/meme_5.tres" id="5_l6y4t"]
+[ext_resource type="SpriteFrames" uid="uid://wtqh8owr66l3" path="res://Data/Masks/Godot Mask/meme_6.tres" id="6_042t3"]
+
+[sub_resource type="GDScript" id="GDScript_fiu2s"]
+script/source = "extends Node2D
+class_name GodotAOE
+
+@export var radius := 64.0
+@export var rotate_speed := 4.0
+@export var duration := 1.2
+@export var damage := 1
+
+@export var meme_frames: Array[SpriteFrames]   # 8 meme pics
+
+@onready var sprites := [
+	$Sprite1,
+	$Sprite2,
+	$Sprite3
+]
+
+@onready var hitbox := $HitBox
+
+var angle := 0.0
+var hit_enemies := {}
+
+func _ready():
+	randomize()
+	_pick_random_memes()
+	_position_sprites()
+
+	hitbox.body_entered.connect(_on_body_entered)
+
+	await get_tree().create_timer(duration).timeout
+	queue_free()
+
+func _pick_random_memes():
+	var pool = meme_frames.duplicate()
+	pool.shuffle()
+
+	for i in range(3):
+		sprites[i].sprite_frames = pool[i]
+		sprites[i].play(\"default\")
+		
+		sprites[i].scale = Vector2.ONE * 0.2
+		
+
+func _position_sprites():
+	for i in range(3):
+		var a = TAU / 3 * i
+		sprites[i].position = Vector2(
+			cos(a),
+			sin(a)
+		) * radius
+
+func _process(delta):
+	angle += rotate_speed * delta
+	rotation = angle
+
+func _on_body_entered(body):
+	if body == get_parent():
+		return
+
+	if hit_enemies.has(body):
+		return
+
+	if body.has_node(\"Health\"):
+		hit_enemies[body] = true
+		body.get_node(\"Health\").take_damage(damage)
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s62c3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ae30s"]
+
+[node name="GodotAOE" type="Node2D" unique_id=566354008]
+script = SubResource("GDScript_fiu2s")
+radius = 100.0
+rotate_speed = 2.0
+duration = 5.0
+damage = 20
+meme_frames = Array[SpriteFrames]([ExtResource("1_7rcx6"), ExtResource("2_ieobm"), ExtResource("3_4jh2t"), ExtResource("4_dl01c"), ExtResource("5_l6y4t"), ExtResource("6_042t3")])
+
+[node name="Sprite1" type="AnimatedSprite2D" parent="." unique_id=324303810]
+sprite_frames = SubResource("SpriteFrames_s62c3")
+
+[node name="Sprite2" type="AnimatedSprite2D" parent="." unique_id=1604583696]
+
+[node name="Sprite3" type="AnimatedSprite2D" parent="." unique_id=930472374]
+
+[node name="HitBox" type="Area2D" parent="." unique_id=68270888]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1069420729]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_ae30s")

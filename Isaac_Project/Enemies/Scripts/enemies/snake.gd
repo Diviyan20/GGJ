@@ -40,3 +40,9 @@ func _on_attack_timer_timeout() -> void:
 	can_attack = true
 	is_attacking = false
 	anim_sprite.play("idle")
+
+# ------------------
+# SNAKE ENEMY DEATH
+# ------------------
+func _on_died() -> void:
+	queue_free()

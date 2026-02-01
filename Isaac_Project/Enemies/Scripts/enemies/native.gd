@@ -56,8 +56,6 @@ func fire_spear() -> void:
 	#TODO: play throw sound and animation
 
 func _on_attack_timer_timeout() -> void:
-	fire_spear()
-		
 	# Start cooldown
 	attack_timer.start()
 	is_attacking = false
@@ -66,3 +64,9 @@ func _on_attack_timer_timeout() -> void:
 	can_attack = true
 	is_attacking = false
 	anim_sprite.play("idle")
+
+# -------------------
+# NATIVE ENEMY DEATH
+# -------------------
+func _on_died() -> void:
+	queue_free()

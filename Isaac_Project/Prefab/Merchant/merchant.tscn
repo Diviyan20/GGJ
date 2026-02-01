@@ -10,6 +10,15 @@
 [ext_resource type="Resource" uid="uid://71lrmiiks217" path="res://Prefab/Potion/Heal Potion.tres" id="7_sbvvu"]
 [ext_resource type="Resource" uid="uid://cd74mxvmi3u38" path="res://Prefab/Potion/Speed Potion.tres" id="8_ja4rg"]
 [ext_resource type="Resource" uid="uid://bb70r2hhtwmcf" path="res://Prefab/Potion/Attack Speed Potion.tres" id="9_dfjo2"]
+[ext_resource type="Script" uid="uid://ccgby8iks613e" path="res://Prefab/Merchant/Bribery System/Resources/MerchantProfile.gd" id="10_sbvvu"]
+[ext_resource type="Resource" uid="uid://18ef52iv1hbl" path="res://Prefab/Merchant/Bribery System/Resources/rumor/godot_rumor.tres" id="11_rnmgy"]
+[ext_resource type="Resource" uid="uid://c7hofna0q00x5" path="res://Prefab/Merchant/Bribery System/Resources/rumor/native_vs_snake_rumor.tres" id="12_xyofk"]
+[ext_resource type="Resource" uid="uid://chovdworubbq2" path="res://Prefab/Merchant/Bribery System/Resources/rumor/native_vs_wolf_rumor.tres" id="13_t1vwt"]
+[ext_resource type="Resource" uid="uid://cp1tycfnre2qt" path="res://Prefab/Merchant/Bribery System/Resources/rumor/wolf_vs_snake_rumor.tres" id="14_eokuj"]
+
+[sub_resource type="Resource" id="Resource_ja4rg"]
+script = ExtResource("10_sbvvu")
+metadata/_custom_type_script = "uid://ccgby8iks613e"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g267c"]
 size = Vector2(47, 62)
@@ -28,6 +37,8 @@ potion_prices = Dictionary[String, int]({
 "Heal Potion": 20,
 "Speed Potion": 40
 })
+merchant_profile = SubResource("Resource_ja4rg")
+rumors = Array[Resource]([ExtResource("11_rnmgy"), ExtResource("12_xyofk"), ExtResource("13_t1vwt"), ExtResource("14_eokuj")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=728673942]
 scale = Vector2(0.2, 0.2)

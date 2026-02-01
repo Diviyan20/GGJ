@@ -10,17 +10,23 @@ extends Area2D
 @export var rumors: Array[MaskEffectRule] = [] # .tres files go here
 @export var greed_factor: float = 1.0 # how corrupt this merchant is
 
+@onready var anim := $AnimatedSprite2D
+@onready var label := $Label
 var player_in_range: Node = null
 
 func _ready():
+	anim.play("default")
+	label.hide()
 	connect("body_entered", _on_body_entered)
 	connect("body_exited", _on_body_exited)
 
 func _on_body_entered(body):
+	label.show()
 	if body.has_method("equip_mask"):
 		player_in_range = body
 
 func _on_body_exited(body):
+	label.hide()
 	if body == player_in_range:
 		player_in_range = null
 

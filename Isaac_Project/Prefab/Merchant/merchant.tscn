@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://7hvw7bwrh5pu"]
 
 [ext_resource type="Script" uid="uid://tn6wyk23hgll" path="res://Prefab/Merchant/merchant.gd" id="1_g267c"]
-[ext_resource type="Texture2D" uid="uid://bv58jscfljw6g" path="res://Image/Merchant.png" id="1_pjjhi"]
 [ext_resource type="Script" uid="uid://coskmirg14acb" path="res://Data/Masks/MaskData.gd" id="2_lns8s"]
 [ext_resource type="Resource" uid="uid://d1fu15gvdvrq8" path="res://Data/Masks/Native/NativeMask.tres" id="3_48bui"]
 [ext_resource type="Resource" uid="uid://bbalv8ihnk3lm" path="res://Data/Masks/Wolf/WolfMask.tres" id="4_jwkd6"]
@@ -12,16 +11,50 @@
 [ext_resource type="Resource" uid="uid://bb70r2hhtwmcf" path="res://Prefab/Potion/Attack Speed Potion.tres" id="9_dfjo2"]
 [ext_resource type="Script" uid="uid://ccgby8iks613e" path="res://Prefab/Merchant/Bribery System/Resources/MerchantProfile.gd" id="10_sbvvu"]
 [ext_resource type="Resource" uid="uid://18ef52iv1hbl" path="res://Prefab/Merchant/Bribery System/Resources/rumor/godot_rumor.tres" id="11_rnmgy"]
+[ext_resource type="Script" uid="uid://bqu8u4e24fq13" path="res://Prefab/Merchant/Bribery System/Resources/MaskEffectRule.gd" id="11_xyofk"]
 [ext_resource type="Resource" uid="uid://c7hofna0q00x5" path="res://Prefab/Merchant/Bribery System/Resources/rumor/native_vs_snake_rumor.tres" id="12_xyofk"]
 [ext_resource type="Resource" uid="uid://chovdworubbq2" path="res://Prefab/Merchant/Bribery System/Resources/rumor/native_vs_wolf_rumor.tres" id="13_t1vwt"]
 [ext_resource type="Resource" uid="uid://cp1tycfnre2qt" path="res://Prefab/Merchant/Bribery System/Resources/rumor/wolf_vs_snake_rumor.tres" id="14_eokuj"]
+[ext_resource type="Texture2D" uid="uid://wcly22f2fiws" path="res://Image/Global Game Jam 2026.png" id="16_t1vwt"]
 
 [sub_resource type="Resource" id="Resource_ja4rg"]
 script = ExtResource("10_sbvvu")
 metadata/_custom_type_script = "uid://ccgby8iks613e"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g267c"]
-size = Vector2(47, 62)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyofk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eokuj"]
+atlas = ExtResource("16_t1vwt")
+region = Rect2(96, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn4ea"]
+atlas = ExtResource("16_t1vwt")
+region = Rect2(96, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2pdp"]
+atlas = ExtResource("16_t1vwt")
+region = Rect2(96, 384, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0but2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eokuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn4ea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2pdp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xyofk"]
+outline_size = 5
+outline_color = Color(0.19506672, 0.19506672, 0.19506669, 1)
 
 [node name="Merchant" type="Area2D" unique_id=657056221]
 script = ExtResource("1_g267c")
@@ -38,12 +71,30 @@ potion_prices = Dictionary[String, int]({
 "Speed Potion": 40
 })
 merchant_profile = SubResource("Resource_ja4rg")
-rumors = Array[Resource]([ExtResource("11_rnmgy"), ExtResource("12_xyofk"), ExtResource("13_t1vwt"), ExtResource("14_eokuj")])
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=728673942]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_pjjhi")
+rumors = Array[ExtResource("11_xyofk")]([ExtResource("11_rnmgy"), ExtResource("12_xyofk"), ExtResource("13_t1vwt"), ExtResource("14_eokuj")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=262659617]
-position = Vector2(2, 0)
-shape = SubResource("RectangleShape2D_g267c")
+scale = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_xyofk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=984996160]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_0but2")
+frame_progress = 0.6976193
+
+[node name="Label" type="Label" parent="." unique_id=2133918987]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -52.0
+offset_right = 71.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to Interact"
+label_settings = SubResource("LabelSettings_xyofk")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cy1uqhys5wfqy" path="res://Enemies/Scripts/data/enemy_data.gd" id="2_0xnws"]
 [ext_resource type="Script" uid="uid://cpu1ntlwe7mgv" path="res://Damage System/health.gd" id="3_ywfkg"]
 [ext_resource type="Script" uid="uid://yugiwm4upl2y" path="res://addons/SuperSprite2D/AnimatedSprite_m.gd" id="4_70ke6"]
+[ext_resource type="Texture2D" uid="uid://cvh7ujv2js8pk" path="res://Sprite/Light/light 2.jpg" id="5_f3cjx"]
 
 [sub_resource type="Resource" id="Resource_ywfkg"]
 script = ExtResource("2_0xnws")
@@ -21,3 +22,8 @@ metadata/_custom_type_script = "uid://yugiwm4upl2y"
 
 [node name="Health" type="Node" parent="." unique_id=79193330]
 script = ExtResource("3_ywfkg")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1932131004]
+color = Color(0.578125, 0.23666993, 0.23666993, 1)
+texture = ExtResource("5_f3cjx")
+texture_scale = 0.5

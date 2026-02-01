@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cpu1ntlwe7mgv" path="res://Damage System/health.gd" id="5_k53q1"]
 [ext_resource type="Texture2D" uid="uid://cuy4sbqykoe8a" path="res://Sprite/Sprite sheet 1.png" id="5_vtle1"]
 [ext_resource type="Script" uid="uid://110xr8a1quo0" path="res://Player/camera_2d.gd" id="6_od3ui"]
+[ext_resource type="Texture2D" uid="uid://cvh7ujv2js8pk" path="res://Sprite/Light/light 2.jpg" id="9_00tjw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f4lon"]
 atlas = ExtResource("4_fhl08")
@@ -705,3 +706,12 @@ texture_filter = 1
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_32uw3")
 animation = &"Wolf_on"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1727285585]
+color = Color(1.353256, 1.353256, 1.353256, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("9_00tjw")
+texture_scale = 2.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1556077070]

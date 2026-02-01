@@ -1,6 +1,9 @@
 extends Area2D
 class_name EnemySpawner
 
+signal wave_started(current_wave: int, total_wave: int)
+signal room_cleared
+
 enum ENEMY_TYPES {NATIVE, WOLF, SNAKE}
 
 @export var enemy_type: ENEMY_TYPES = ENEMY_TYPES.NATIVE
@@ -56,6 +59,7 @@ func spawn_enemy():
 	while current_wave_count < wave_count:
 		if is_wave_complete: 
 			is_wave_complete = false
+			emit_signal("wave_started", current_wave_count + 1, wave_count)
 			var spawn_amount = randi_range(enemy_min_count, enemy_max_count)
 			current_enemy_count = spawn_amount
 			
@@ -95,6 +99,7 @@ func spawn_enemy():
 		await wave_completed()
 	
 	print("All waves complete!")
+	emit_signal("room_cleared")
 
 func get_circle_position(center: Vector2, index: int, total: int) -> Vector2:
 	var angle = (TAU / total) * index  # Evenly distribute around circle
